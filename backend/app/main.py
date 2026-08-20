@@ -7,6 +7,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from app.api.query import router as query_router
 from app.api.upload import router as upload_router
 from app.core.config import settings
 
@@ -32,6 +33,7 @@ app = FastAPI(
 )
 
 app.include_router(upload_router)
+app.include_router(query_router)
 
 app.add_middleware(
     CORSMiddleware,

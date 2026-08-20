@@ -35,3 +35,6 @@ backend/data/vector_store/*
 !backend/data/raw_documents/.gitkeep
 !backend/data/processed/.gitkeep
 !backend/data/vector_store/.gitkeep
+
+# Runtime/uploaded data inside application directory
+backend/app/data/*
