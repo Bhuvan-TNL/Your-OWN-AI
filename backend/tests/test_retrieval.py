@@ -131,3 +131,41 @@ def test_invalid_top_k_is_rejected(tmp_path) -> None:
 
     with pytest.raises(ValueError):
         retriever.retrieve("question", top_k=0)
+
+
+def test_retriever_refreshes_persisted_index_after_upload(tmp_path) -> None:
+    index_path = tmp_path / "live_refresh_index"
+
+    sample_chunk = DocumentChunk(
+        document_id="sample-doc",
+        filename="sample.txt",
+        chunk_id="sample-doc-chunk-0001",
+        page_number=1,
+        text="Alpha beta gamma delta epsilon zeta eta. More content after the break.",
+    )
+    sample_store = VectorStore(index_path=index_path, top_k=3)
+    sample_store.add_chunks([sample_chunk], embed_texts([sample_chunk.text]))
+    sample_store.save()
+
+    retriever = QueryRetriever(index_path=str(index_path), top_k=3)
+    sample_results = retriever.retrieve("Alpha beta gamma delta epsilon", top_k=3)
+    assert sample_results
+    assert sample_results[0].filename == "sample.txt"
+
+    soa_chunk = DocumentChunk(
+        document_id="cloud-doc",
+        filename="Cloud Computing Notes.pdf",
+        chunk_id="cloud-doc-chunk-0001",
+        page_number=14,
+        text="Service-Oriented Architecture (SOA) is an architectural model in which loosely coupled services are exposed over a network so that organizations can access cloud-based services through standard interfaces.",
+    )
+    live_store = VectorStore(index_path=index_path, top_k=3)
+    live_store.add_chunks([soa_chunk], embed_texts([soa_chunk.text]))
+    live_store.save()
+
+    refreshed_results = retriever.retrieve("What is Service-Oriented Architecture (SOA)?", top_k=1)
+    assert refreshed_results
+    assert refreshed_results[0].filename == "Cloud Computing Notes.pdf"
+    assert refreshed_results[0].document_id == "cloud-doc"
+    assert "SOA" in refreshed_results[0].text or "Service-Oriented Architecture" in refreshed_results[0].text
+    assert refreshed_results[0].filename != "sample.txt"

@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.services.chunker import chunk_text, validate_chunk_parameters
+from app.services.chunker import chunk_document, chunk_text, validate_chunk_parameters
 from app.services.doc_processor import EmptyDocumentError, UnsupportedFileTypeError, process_document
 
 
@@ -39,6 +39,23 @@ def test_chunking_generates_metadata() -> None:
     assert chunks[0].page_number == 1
     assert chunks[0].chunk_id.startswith("doc-002-chunk-")
     assert chunks[0].text
+
+
+def test_chunk_document_uses_actual_page_content_for_page_metadata() -> None:
+    chunks = chunk_document(
+        "Page one text. Page two text.",
+        document_id="doc-pages",
+        filename="notes.pdf",
+        page_content=[
+            (1, "Page one text."),
+            (2, "Page two text."),
+        ],
+        chunk_size=2,
+        chunk_overlap=0,
+    )
+
+    assert chunks[-1].page_number == 2
+    assert any(chunk.page_number == 2 for chunk in chunks)
 
 
 def test_invalid_chunk_parameters() -> None:

@@ -41,12 +41,25 @@ class RetrievalResult:
 class QueryRetriever:
     """Semantic retrieval layer built on the configured embedding model and FAISS index."""
 
-    def __init__(self, index_path: str | None = None, top_k: int | None = None) -> None:
+    def __init__(
+        self,
+        index_path: str | None = None,
+        top_k: int | None = None,
+        similarity_threshold: float | None = None,
+    ) -> None:
         self.index_path = index_path or settings.faiss_index_path
         self.top_k = int(top_k if top_k is not None else settings.top_k)
+        self.similarity_threshold = float(
+            similarity_threshold if similarity_threshold is not None else settings.similarity_threshold
+        )
         if self.top_k <= 0:
             raise ValueError("TOP_K must be greater than 0.")
+        if not -1.0 <= self.similarity_threshold <= 1.0:
+            raise ValueError("similarity_threshold must be between -1 and 1.")
         self.vector_store = create_vector_store(index_path=self.index_path, top_k=self.top_k)
+
+    def refresh(self) -> None:
+        self.vector_store.refresh()
 
     def retrieve(self, question: str, top_k: int | None = None) -> list[RetrievalResult]:
         if question is None or not str(question).strip():
@@ -56,6 +69,7 @@ class QueryRetriever:
         if effective_top_k <= 0:
             raise ValueError("top_k must be greater than 0.")
 
+        self.refresh()
         started_at = time.perf_counter()
 
         try:
@@ -76,10 +90,12 @@ class QueryRetriever:
 
         retrieval_results: list[RetrievalResult] = []
         for rank, result in enumerate(raw_results, start=1):
+            if result.score < self.similarity_threshold:
+                continue
             metadata = result.metadata or {}
             retrieval_results.append(
                 RetrievalResult(
-                    rank=rank,
+                    rank=len(retrieval_results) + 1,
                     score=float(result.score),
                     document_id=str(metadata.get("document_id", "unknown-document")),
                     filename=str(metadata.get("filename", "unknown-file")),
@@ -99,8 +115,6 @@ class QueryRetriever:
         return retrieval_results
 
 
-retriever = QueryRetriever(index_path=settings.faiss_index_path, top_k=settings.top_k)
-
-
 def perform_retrieval(question: str, top_k: int | None = None) -> list[RetrievalResult]:
-    return retriever.retrieve(question, top_k=top_k)
+    default_retriever = QueryRetriever(index_path=settings.faiss_index_path, top_k=settings.top_k)
+    return default_retriever.retrieve(question, top_k=top_k)

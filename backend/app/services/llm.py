@@ -39,7 +39,7 @@ class LLMGenerationResult:
 
 
 class BaseLLMProvider(Protocol):
-    def generate(self, prompt: str) -> str:
+    def generate(self, prompt: str, *, max_tokens: int | None = None) -> str:
         ...
 
 
@@ -49,26 +49,49 @@ class MockLLMProvider:
     def __init__(self, model: str = "mock-model") -> None:
         self.model = model
 
-    def generate(self, prompt: str) -> str:
+    def generate(self, prompt: str, *, max_tokens: int | None = None) -> str:
         cleaned = prompt.strip()
         if not cleaned:
             raise LLMConfigurationError("Prompt cannot be empty.")
-        if "context:" in cleaned.lower():
-            return "Based on the provided context, the answer is grounded in the retrieved material."
+        context_marker = "\ncontext:\n"
+        question_marker = "\n\nquestion:"
+        context_start = cleaned.lower().find(context_marker)
+        if context_start >= 0:
+            context = cleaned[context_start + len(context_marker) :]
+            question_start = context.lower().find(question_marker)
+            if question_start >= 0:
+                context = context[:question_start]
+            context_lines = [line.strip() for line in context.splitlines() if line.strip()]
+            source_lines = [line for line in context_lines if line.startswith("[Source:")]
+            answer_lines = [line for line in context_lines if not line.startswith("[Source:")]
+            if answer_lines:
+                excerpt = answer_lines[0]
+                return f"Based on the provided context: {excerpt}"
+            if source_lines:
+                return "Based on the provided context, the retrieved source is relevant to the question."
         return "This is a mock LLM response generated locally for development and testing."
 
 
 class HuggingFaceLLMProvider:
     """Provider-neutral wrapper for Hugging Face inference calls."""
 
-    def __init__(self, model: str, token: str | None = None) -> None:
+    def __init__(
+        self,
+        model: str,
+        token: str | None = None,
+        *,
+        max_tokens: int = 256,
+        temperature: float = 0.2,
+    ) -> None:
         self.model = model
         self.token = token or ""
+        self.max_tokens = max_tokens
+        self.temperature = temperature
 
-    def generate(self, prompt: str) -> str:
+    def generate(self, prompt: str, *, max_tokens: int | None = None) -> str:
         if not prompt or not prompt.strip():
             raise LLMConfigurationError("Prompt cannot be empty.")
-        if not self.model or self.model == "your_model_here":
+        if not self.model or self.model.strip() in {"", "your_model_here"}:
             raise LLMConfigurationError(
                 "LLM_MODEL is not configured. Set it in backend/.env or environment variables."
             )
@@ -80,8 +103,8 @@ class HuggingFaceLLMProvider:
         payload = {
             "inputs": prompt,
             "parameters": {
-                "max_new_tokens": 256,
-                "temperature": 0.2,
+                "max_new_tokens": max_tokens if max_tokens is not None else self.max_tokens,
+                "temperature": self.temperature,
                 "return_full_text": False,
             },
         }
@@ -105,11 +128,12 @@ class HuggingFaceLLMProvider:
         if isinstance(data, list):
             if not data:
                 raise LLMProviderError("Hugging Face returned an empty response.")
-            generated_text = data[0].get("generated_text") if isinstance(data[0], dict) else str(data[0])
+            first_item = data[0]
+            generated_text = first_item.get("generated_text") if isinstance(first_item, dict) else str(first_item)
         elif isinstance(data, dict):
-            generated_text = data.get("generated_text")
-            if generated_text is None and "error" in data:
+            if "error" in data:
                 raise LLMProviderError(str(data["error"]))
+            generated_text = data.get("generated_text")
         else:
             generated_text = str(data)
 
@@ -127,15 +151,35 @@ class LLMService:
         provider: str | None = None,
         model: str | None = None,
         token: str | None = None,
+        system_prompt: str | None = None,
+        max_tokens: int | None = None,
+        temperature: float | None = None,
     ) -> None:
-        self.provider = (provider or settings.llm_provider or "huggingface").strip().lower()
-        self.model = model or settings.llm_model or "your_model_here"
+        raw_provider = provider if provider is not None else settings.llm_provider
+        self.provider = (raw_provider or "huggingface").strip().lower()
+        raw_model = model if model is not None else settings.llm_model
+        self.model = raw_model.strip() if isinstance(raw_model, str) else (raw_model or "google/flan-t5-base")
         self.token = token if token is not None else settings.hf_token
+        self.system_prompt = (system_prompt if system_prompt is not None else settings.llm_system_prompt).strip()
+        self.max_tokens = int(max_tokens if max_tokens is not None else settings.llm_max_tokens)
+        self.temperature = float(temperature if temperature is not None else settings.llm_temperature)
+
+        if not self.system_prompt:
+            raise LLMConfigurationError("LLM_SYSTEM_PROMPT cannot be empty.")
+        if self.max_tokens <= 0:
+            raise LLMConfigurationError("LLM_MAX_TOKENS must be greater than 0.")
+        if not 0.0 <= self.temperature <= 2.0:
+            raise LLMConfigurationError("LLM_TEMPERATURE must be between 0 and 2.")
 
         if self.provider == "mock":
             self._provider: BaseLLMProvider = MockLLMProvider(model=self.model)
         elif self.provider == "huggingface":
-            self._provider = HuggingFaceLLMProvider(model=self.model, token=self.token)
+            self._provider = HuggingFaceLLMProvider(
+                model=self.model,
+                token=self.token,
+                max_tokens=self.max_tokens,
+                temperature=self.temperature,
+            )
         else:
             raise LLMConfigurationError(f"Unsupported LLM provider '{self.provider}'.")
 
@@ -146,16 +190,13 @@ class LLMService:
         if not clean_question:
             raise LLMConfigurationError("Question cannot be empty.")
 
-        if not clean_context:
-            return (
-                "You are a helpful assistant. Answer the user's question using only the available knowledge. "
-                f"Question: {clean_question}"
-            )
-
+        context_section = clean_context or "(No relevant context was retrieved.)"
         return (
-            "You are a grounded assistant. Use the provided context to answer the user's question. "
-            "If the context does not contain enough information, say so clearly.\n\n"
-            f"Context:\n{clean_context}\n\nQuestion:\n{clean_question}"
+            f"System instructions:\n{self.system_prompt}\n\n"
+            "Context:\n"
+            f"{context_section}\n\n"
+            f"Question:\n{clean_question}\n\n"
+            "Answer using only the context above. If it is insufficient, say so clearly."
         )
 
     def generate_answer(
@@ -169,7 +210,12 @@ class LLMService:
         started_at = time.perf_counter()
 
         try:
-            answer = self._provider.generate(prompt)
+            if max_tokens is None:
+                answer = self._provider.generate(prompt)
+            else:
+                answer = self._provider.generate(prompt, max_tokens=max_tokens)
+        except LLMConfigurationError:
+            raise
         except LLMProviderError as exc:
             logger.exception("LLM generation failed for provider=%s model=%s", self.provider, self.model)
             raise LLMProviderError(f"LLM generation failed: {exc}") from exc
@@ -192,5 +238,9 @@ def build_prompt(question: str, context: str) -> str:
 
 
 def generate_answer(question: str, context: str, *, provider: str | None = None, model: str | None = None) -> LLMGenerationResult:
-    service = LLMService(provider=provider or settings.llm_provider, model=model or settings.llm_model, token=settings.hf_token)
+    service = LLMService(
+        provider=provider if provider is not None else settings.llm_provider,
+        model=model if model is not None else settings.llm_model,
+        token=settings.hf_token,
+    )
     return service.generate_answer(question, context)

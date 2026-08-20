@@ -95,9 +95,23 @@ class VectorStore:
                     "chunk_id": chunk.chunk_id,
                     "page_number": chunk.page_number,
                     "text": chunk.text,
+                    "content_hash": chunk.content_hash,
                 }
             )
         self.add_vectors(vectors, metadata_list)
+
+    def find_document_ids_by_content_hash(self, content_hash: str) -> list[str]:
+        """Return already indexed document IDs whose original bytes have the same hash."""
+        if not content_hash:
+            return []
+
+        return sorted(
+            {
+                str(metadata["document_id"])
+                for metadata in self.metadata
+                if metadata.get("content_hash") == content_hash and metadata.get("document_id")
+            }
+        )
 
     def search(self, query_vector: np.ndarray, top_k: int | None = None) -> list[SearchResult]:
         if self.index is None or self.index.ntotal == 0:
@@ -148,12 +162,17 @@ class VectorStore:
         else:
             self.metadata = []
 
+    def refresh(self) -> None:
+        if self.index_path.exists():
+            self.load()
+            logger.info("Refreshed vector store from disk at %s", self.index_path)
+        else:
+            self.index = faiss.IndexFlatIP(self.dimension)
+            self.metadata = []
+
     @property
     def is_empty(self) -> bool:
         return self.index is None or self.index.ntotal == 0
-
-
-vector_store = VectorStore(index_path=settings.faiss_index_path, top_k=settings.top_k)
 
 
 def create_vector_store(index_path: str | Path | None = None, top_k: int | None = None) -> VectorStore:

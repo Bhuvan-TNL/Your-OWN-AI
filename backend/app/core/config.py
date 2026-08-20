@@ -5,7 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
-BACKEND_DIR: Final[Path] = Path(__file__).resolve().parents[1]
+APP_DIR: Final[Path] = Path(__file__).resolve().parents[1]
+BACKEND_DIR: Final[Path] = APP_DIR.parent
 DOTENV_PATH: Final[Path] = BACKEND_DIR / ".env"
 
 
@@ -49,6 +50,30 @@ def _as_non_negative_int(value: str, *, field_name: str) -> int:
     return parsed
 
 
+def _as_temperature(value: str, *, field_name: str) -> float:
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError) as exc:  # pragma: no cover - defensive validation
+        raise ValueError(f"{field_name} must be a number.") from exc
+
+    if not 0.0 <= parsed <= 2.0:
+        raise ValueError(f"{field_name} must be between 0 and 2.")
+
+    return parsed
+
+
+def _as_similarity_threshold(value: str, *, field_name: str) -> float:
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError) as exc:  # pragma: no cover - defensive validation
+        raise ValueError(f"{field_name} must be a number.") from exc
+
+    if not -1.0 <= parsed <= 1.0:
+        raise ValueError(f"{field_name} must be between -1 and 1.")
+
+    return parsed
+
+
 def _resolve_output_path(raw_value: str) -> str:
     configured_path = Path(raw_value)
     if configured_path.is_absolute():
@@ -60,11 +85,15 @@ def _resolve_output_path(raw_value: str) -> str:
 class Settings:
     llm_provider: str
     llm_model: str
+    llm_system_prompt: str
+    llm_max_tokens: int
+    llm_temperature: float
     embedding_model: str
     faiss_index_path: str
     chunk_size: int
     chunk_overlap: int
     top_k: int
+    similarity_threshold: float
     hf_token: str = ""
 
     @classmethod
@@ -75,7 +104,20 @@ class Settings:
         if not llm_provider:
             raise ValueError("LLM_PROVIDER cannot be empty.")
 
-        llm_model = (os.getenv("LLM_MODEL", "your_model_here") or "your_model_here").strip() or "your_model_here"
+        llm_model = (os.getenv("LLM_MODEL", "google/gemma-2-2b-it") or "google/gemma-2-2b-it").strip() or "google/gemma-2-2b-it"
+        llm_system_prompt = (
+            os.getenv(
+                "LLM_SYSTEM_PROMPT",
+                "You are a grounded assistant. Use only the provided context. Do not use outside knowledge or invent facts. "
+                "If the context is insufficient, say so clearly. Keep the answer concise and preserve factual meaning.",
+            )
+            or ""
+        ).strip()
+        if not llm_system_prompt:
+            raise ValueError("LLM_SYSTEM_PROMPT cannot be empty.")
+
+        llm_max_tokens = _as_positive_int(os.getenv("LLM_MAX_TOKENS", "256"), field_name="LLM_MAX_TOKENS")
+        llm_temperature = _as_temperature(os.getenv("LLM_TEMPERATURE", "0.2"), field_name="LLM_TEMPERATURE")
 
         embedding_model = (os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2") or "sentence-transformers/all-MiniLM-L6-v2").strip() or "sentence-transformers/all-MiniLM-L6-v2"
 
@@ -89,16 +131,24 @@ class Settings:
             raise ValueError("CHUNK_OVERLAP must be smaller than CHUNK_SIZE.")
 
         top_k = _as_positive_int(os.getenv("TOP_K", "5"), field_name="TOP_K")
+        similarity_threshold = _as_similarity_threshold(
+            os.getenv("SIMILARITY_THRESHOLD", "-1.0"),
+            field_name="SIMILARITY_THRESHOLD",
+        )
         hf_token = (os.getenv("HF_TOKEN", "") or "").strip()
 
         return cls(
             llm_provider=llm_provider,
             llm_model=llm_model,
+            llm_system_prompt=llm_system_prompt,
+            llm_max_tokens=llm_max_tokens,
+            llm_temperature=llm_temperature,
             embedding_model=embedding_model,
             faiss_index_path=faiss_index_path,
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
             top_k=top_k,
+            similarity_threshold=similarity_threshold,
             hf_token=hf_token,
         )
 
