@@ -1,0 +1,173 @@
+[
+  {
+    "id": "cloud-001",
+    "question": "What is cloud computing?",
+    "expected_answer": "Cloud computing is the delivery of computing services such as servers, storage, databases, networking, software, analytics, and intelligence over the Internet, using remote servers instead of a local computer or data centre.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [2, 3],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-002",
+    "question": "Which cloud service providers are listed in the notes?",
+    "expected_answer": "The notes list Google Cloud, AWS, Microsoft Azure, IBM Cloud, and Alibaba.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [3],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-003",
+    "question": "What are the different types of cloud deployment models described in the notes?",
+    "expected_answer": "The deployment types described are public, private, hybrid, and community clouds.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [3, 22, 24],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-004",
+    "question": "What is virtualization in cloud computing?",
+    "expected_answer": "Virtualization creates a virtual environment that allows multiple applications and operating systems to run on the same physical server, increasing the use of virtual machines.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [4],
+    "question_type": "conceptual",
+    "supported": true
+  },
+  {
+    "id": "cloud-005",
+    "question": "What is Service-Oriented Architecture (SOA), and how does it help organizations?",
+    "expected_answer": "SOA allows organizations to access on-demand, cloud-based computing solutions according to changing business needs. The notes describe it as easy to maintain, platform independent, and highly scalable.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [4],
+    "question_type": "multi_sentence",
+    "supported": true
+  },
+  {
+    "id": "cloud-006",
+    "question": "What are the two major roles within SOA?",
+    "expected_answer": "The two major roles within SOA are the service provider and the service consumer.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [4],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-007",
+    "question": "What are some applications of Service-Oriented Architecture mentioned in the notes?",
+    "expected_answer": "The notes mention healthcare, mobile applications and games, and air-force situational-awareness systems.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [4],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-008",
+    "question": "What are the major characteristics or features of cloud computing?",
+    "expected_answer": "The notes describe resource pooling, on-demand self-service, easy maintenance, scalability and rapid elasticity, economical usage, measured and reporting service, security, automation, resilience, and large network access.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [7, 8],
+    "question_type": "conceptual",
+    "supported": true
+  },
+  {
+    "id": "cloud-009",
+    "question": "How does cloud migration work, and what benefits are identified in the notes?",
+    "expected_answer": "Cloud migration transfers applications, data, and other business components to a cloud platform, including from an on-premises data centre to a public cloud or between cloud environments. Benefits include flexibility, scalability, agility, productivity, security, and profitability.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [10],
+    "question_type": "multi_sentence",
+    "supported": true
+  },
+  {
+    "id": "cloud-010",
+    "question": "What is the pay-as-you-go model in cloud computing economics?",
+    "expected_answer": "The pay-as-you-go model charges users only for the cloud services or resources they use, helping reduce infrastructure, maintenance, and administrative costs.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [12],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-011",
+    "question": "What are the main components of cloud computing architecture?",
+    "expected_answer": "The components listed are client infrastructure, application, service, runtime cloud, storage, infrastructure, management, security, and the Internet.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [8],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-012",
+    "question": "What are the advantages of using a private cloud?",
+    "expected_answer": "The notes identify customer information protection and infrastructure that can ensure service-level agreements as advantages of a private cloud.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [22],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-013",
+    "question": "What is a community cloud and why might it be used?",
+    "expected_answer": "A community cloud integrates services to address the needs of an industry, community, or business sector, with infrastructure shared by organizations that have common concerns or tasks.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [24],
+    "question_type": "conceptual",
+    "supported": true
+  },
+  {
+    "id": "cloud-014",
+    "question": "How do parallel computing and distributed computing differ according to the notes?",
+    "expected_answer": "Parallel computing runs processes simultaneously with processors communicating through a bus, while distributed computing uses networked computer systems that coordinate by passing messages.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [34],
+    "question_type": "comparison",
+    "supported": true
+  },
+  {
+    "id": "cloud-015",
+    "question": "What are the four main components of Hadoop architecture?",
+    "expected_answer": "The four components are MapReduce, HDFS, YARN, and Hadoop Common or common utilities.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [37],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-016",
+    "question": "What is KVM in the context of virtualization?",
+    "expected_answer": "KVM is an open-source virtualization module built into the Linux kernel that enables Linux to function as a Type 1 bare-metal hypervisor, although the Type 1 and Type 2 distinction can be blurred.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [54],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-017",
+    "question": "What is a cloud platform?",
+    "expected_answer": "A cloud platform is described as the operating system and hardware of a server in an Internet-based data centre, enabling remote and large-scale coexistence of software and hardware resources.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [97],
+    "question_type": "direct_factual",
+    "supported": true
+  },
+  {
+    "id": "cloud-018",
+    "question": "How do cloud computing and data analytics differ?",
+    "expected_answer": "Cloud computing stores, manages, and processes data on remote Internet servers, while data analytics inspects, cleans, transforms, and models data to discover useful information for decision-making.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [99],
+    "question_type": "multi_sentence",
+    "supported": true
+  },
+  {
+    "id": "cloud-019",
+    "question": "What is the capital of France?",
+    "expected_answer": "The uploaded Cloud Computing notes do not provide information about the capital of France, so the assistant should state that the answer is unsupported by the retrieved document.",
+    "expected_source": "Cloud Computing Notes.pdf",
+    "expected_pages": [],
+    "question_type": "unsupported",
+    "supported": false
+  }
+]
