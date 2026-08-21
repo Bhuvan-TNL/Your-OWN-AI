@@ -1,0 +1,12 @@
+{
+  "status": "blocked",
+  "supported_question_count": 18,
+  "correct_document_rate": null,
+  "correct_page_rate": null,
+  "mean_supported_groundedness_token_overlap": null,
+  "low_groundedness_count": 0,
+  "unsupported_question_count": 1,
+  "unsupported_refusal_rate": null,
+  "unsupported_questions_with_context": 0,
+  "answer_agreement_note": "Groundedness is a token-overlap diagnostic. It does not prove semantic entailment or absence of unsupported claims; human review or an entailment evaluator is required."
+}

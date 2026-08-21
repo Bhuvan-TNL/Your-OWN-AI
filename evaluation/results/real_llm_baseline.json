@@ -1,0 +1,69 @@
+{
+  "experiment": "phase_8_real_llm_validation",
+  "created_at": "2026-08-21T10:42:21.367054+00:00",
+  "status": "blocked",
+  "live_validation": false,
+  "provider": "huggingface",
+  "model": "google/flan-t5-base",
+  "configuration": {
+    "chunk_size": 256,
+    "chunk_overlap": 100,
+    "top_k": 5,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.15,
+    "llm_provider": "huggingface",
+    "llm_model": "google/flan-t5-base",
+    "llm_max_tokens": 256,
+    "llm_temperature": 0.2
+  },
+  "dataset": "C:\\Users\\bhuva\\OneDrive\\Documents\\Your Own AI\\evaluation\\questions.json",
+  "question_count": 19,
+  "blocked_reason": "HF_TOKEN is not configured in backend/.env; no Hugging Face calls were made.",
+  "smoke_test": {
+    "status": "not_run",
+    "reason": "HF_TOKEN is not configured in backend/.env; no Hugging Face calls were made."
+  },
+  "non_live_validation": {
+    "configuration_loaded": true,
+    "provider_is_huggingface": true,
+    "index": {
+      "index_path": "C:\\Users\\bhuva\\OneDrive\\Documents\\Your Own AI\\backend\\data\\vector_store",
+      "faiss_index_exists": true,
+      "metadata_exists": true,
+      "document_count": 2,
+      "chunk_count": 211,
+      "unique_document_ids": [
+        "doc-3b1490345df626f5",
+        "doc-a6ca82aee931160b"
+      ],
+      "unique_content_hashes": 2,
+      "duplicate_content_hash_chunk_keys": 0,
+      "missing_page_numbers": 0,
+      "min_page_number": 1,
+      "max_page_number": 102
+    },
+    "questions_loaded_without_modification": true
+  },
+  "metric_groups": {
+    "retrieval": null,
+    "generation_answer_quality": null
+  },
+  "records": [],
+  "source_citation_correctness": {
+    "status": "blocked",
+    "supported_question_count": 18,
+    "correct_document_rate": null,
+    "correct_page_rate": null,
+    "mean_supported_groundedness_token_overlap": null,
+    "low_groundedness_count": 0,
+    "unsupported_question_count": 1,
+    "unsupported_refusal_rate": null,
+    "unsupported_questions_with_context": 0,
+    "answer_agreement_note": "Groundedness is a token-overlap diagnostic. It does not prove semantic entailment or absence of unsupported claims; human review or an entailment evaluator is required."
+  },
+  "security": {
+    "token_logged": false,
+    "token_written_to_result": false,
+    "env_file_ignored": true
+  }
+}

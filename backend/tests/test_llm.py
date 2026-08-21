@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pytest
+import httpx
 
 from app.services.llm import LLMConfigurationError, LLMProviderError, LLMService, build_prompt
 
@@ -113,3 +114,29 @@ def test_hf_generation_uses_configured_request_parameters(monkeypatch) -> None:
         "temperature": 0.7,
         "return_full_text": False,
     }
+
+
+def test_hf_provider_timeout_is_reported_cleanly(monkeypatch) -> None:
+    def fake_post(*args, **kwargs):
+        raise httpx.TimeoutException("request timed out")
+
+    monkeypatch.setattr("app.services.llm.httpx.Client.post", fake_post)
+    service = LLMService(provider="huggingface", model="google/flan-t5-base")
+
+    with pytest.raises(LLMProviderError, match="request failed"):
+        service.generate_answer("What is normalization?", "Normalization reduces redundancy.")
+
+
+def test_hf_provider_empty_response_is_rejected(monkeypatch) -> None:
+    class DummyResponse:
+        status_code = 200
+        text = ""
+
+        def json(self):
+            return []
+
+    monkeypatch.setattr("app.services.llm.httpx.Client.post", lambda *args, **kwargs: DummyResponse())
+    service = LLMService(provider="huggingface", model="google/flan-t5-base")
+
+    with pytest.raises(LLMProviderError, match="empty response"):
+        service.generate_answer("What is normalization?", "Normalization reduces redundancy.")

@@ -1,0 +1,8 @@
+{
+  "experiment": "phase_8_failure_analysis",
+  "status": "blocked",
+  "analysis_basis": "No real-provider records were produced.",
+  "reason": "HF_TOKEN is not configured in backend/.env; no Hugging Face calls were made.",
+  "representative_examples": [],
+  "non_fabrication_note": "Real failure causes are not inferred without real LLM outputs."
+}
