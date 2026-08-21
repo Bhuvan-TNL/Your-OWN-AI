@@ -1,0 +1,705 @@
+{
+  "experiment": "phase_7_parameter_optimization",
+  "created_at": "2026-08-20T21:40:56.740870+00:00",
+  "evaluation_mode": "mock_provider_retrieval_optimization",
+  "baseline": {
+    "name": "baseline",
+    "configuration": {
+      "chunk_size": 512,
+      "chunk_overlap": 50,
+      "top_k": 5,
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "llm_provider": "mock",
+      "llm_model": "mock-model",
+      "similarity_threshold": -1.0
+    },
+    "index_stats": {
+      "document_count": 2,
+      "chunk_count": 72
+    },
+    "retrieval_hit_at_k": 1,
+    "page_hit_at_k": 0.5555555555555556,
+    "supported_answer_token_f1_mean": 0.05706343515808476,
+    "supported_answer_embedding_cosine_mean": 0.6020516140593423,
+    "groundedness_token_overlap_mean": 0.9928806157558336,
+    "unsupported_refusal_rate": 0,
+    "retrieval_latency": {
+      "mean_ms": 11.077663158893733,
+      "median_ms": 10.576399996352848,
+      "p95_ms": 22.410600002331194
+    },
+    "total_latency": {
+      "mean_ms": 11.327678948873654,
+      "median_ms": 10.863199997402262,
+      "p95_ms": 22.688400000333786
+    }
+  },
+  "experiments": {
+    "chunk_size": [
+      {
+        "name": "chunk_size_256",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 25,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 143,
+          "unique_content_hashes": 2,
+          "page_count": 94
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.6666666666666666,
+        "supported_answer_token_f1_mean": 0.11211214183067816,
+        "supported_answer_embedding_cosine_mean": 0.6236932790941663,
+        "groundedness_token_overlap_mean": 0.9857804808741304,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 10.74880526223416,
+          "median_ms": 10.535800000070594,
+          "p95_ms": 19.8374999963562
+        },
+        "total_latency": {
+          "mean_ms": 10.885599999088107,
+          "median_ms": 10.694900003727525,
+          "p95_ms": 19.94429999467684
+        }
+      },
+      {
+        "name": "chunk_size_512",
+        "configuration": {
+          "chunk_size": 512,
+          "chunk_overlap": 50,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 72,
+          "unique_content_hashes": 2,
+          "page_count": 67
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.5555555555555556,
+        "supported_answer_token_f1_mean": 0.05706343515808476,
+        "supported_answer_embedding_cosine_mean": 0.6020516140593423,
+        "groundedness_token_overlap_mean": 0.9928806157558336,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 11.558805262642348,
+          "median_ms": 10.788100000354461,
+          "p95_ms": 24.682300005224533
+        },
+        "total_latency": {
+          "mean_ms": 11.835384209821074,
+          "median_ms": 11.10829999379348,
+          "p95_ms": 24.994600003992673
+        }
+      },
+      {
+        "name": "chunk_size_768",
+        "configuration": {
+          "chunk_size": 768,
+          "chunk_overlap": 75,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 49,
+          "unique_content_hashes": 2,
+          "page_count": 49
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.3888888888888889,
+        "supported_answer_token_f1_mean": 0.04073546767757401,
+        "supported_answer_embedding_cosine_mean": 0.5670309530364143,
+        "groundedness_token_overlap_mean": 0.9955002241719996,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 11.324473684668957,
+          "median_ms": 10.711200004152488,
+          "p95_ms": 22.39420000114478
+        },
+        "total_latency": {
+          "mean_ms": 11.715168420969826,
+          "median_ms": 11.102500000561122,
+          "p95_ms": 22.829699999419972
+        }
+      },
+      {
+        "name": "chunk_size_1024",
+        "configuration": {
+          "chunk_size": 1024,
+          "chunk_overlap": 100,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 37,
+          "unique_content_hashes": 2,
+          "page_count": 37
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.3333333333333333,
+        "supported_answer_token_f1_mean": 0.03166390102964982,
+        "supported_answer_embedding_cosine_mean": 0.568561794857184,
+        "groundedness_token_overlap_mean": 0.9968036374738601,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 11.362173683760615,
+          "median_ms": 10.895500003243797,
+          "p95_ms": 23.99839999998221
+        },
+        "total_latency": {
+          "mean_ms": 11.799605263053978,
+          "median_ms": 11.25250000768574,
+          "p95_ms": 24.467399998684414
+        }
+      }
+    ],
+    "overlap": [
+      {
+        "name": "overlap_0",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 0,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 129,
+          "unique_content_hashes": 2,
+          "page_count": 94
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.6666666666666666,
+        "supported_answer_token_f1_mean": 0.11813435383507648,
+        "supported_answer_embedding_cosine_mean": 0.6447153952386644,
+        "groundedness_token_overlap_mean": 0.9856147892734046,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 11.705431579014801,
+          "median_ms": 10.914600003161468,
+          "p95_ms": 21.88919999753125
+        },
+        "total_latency": {
+          "mean_ms": 11.848142105200646,
+          "median_ms": 11.024999999790452,
+          "p95_ms": 22.0365999994101
+        }
+      },
+      {
+        "name": "overlap_25",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 25,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 143,
+          "unique_content_hashes": 2,
+          "page_count": 94
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.6666666666666666,
+        "supported_answer_token_f1_mean": 0.11211214183067816,
+        "supported_answer_embedding_cosine_mean": 0.6236932790941663,
+        "groundedness_token_overlap_mean": 0.9857804808741304,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 11.924031579263485,
+          "median_ms": 11.322699996526353,
+          "p95_ms": 20.267399995645974
+        },
+        "total_latency": {
+          "mean_ms": 12.078726316854285,
+          "median_ms": 11.48569999350002,
+          "p95_ms": 20.414599996001925
+        }
+      },
+      {
+        "name": "overlap_50",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 50,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 160,
+          "unique_content_hashes": 2,
+          "page_count": 94
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.5555555555555556,
+        "supported_answer_token_f1_mean": 0.10347895963759993,
+        "supported_answer_embedding_cosine_mean": 0.6059409611754947,
+        "groundedness_token_overlap_mean": 0.9848132628846029,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 12.153647367468741,
+          "median_ms": 11.486900002637412,
+          "p95_ms": 21.304800000507385
+        },
+        "total_latency": {
+          "mean_ms": 12.329284208949263,
+          "median_ms": 11.695299996063113,
+          "p95_ms": 21.479099996213336
+        }
+      },
+      {
+        "name": "overlap_100",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.7777777777777778,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.98499128865912,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 12.343015789443406,
+          "median_ms": 11.718199995812029,
+          "p95_ms": 23.907600007078145
+        },
+        "total_latency": {
+          "mean_ms": 12.497800000250878,
+          "median_ms": 11.881799997354392,
+          "p95_ms": 24.052900007518474
+        }
+      }
+    ],
+    "top_k": [
+      {
+        "name": "top_k_1",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 1,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.4444444444444444,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.9814057114125527,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 15.555731577670054,
+          "median_ms": 14.808799998718314,
+          "p95_ms": 30.358500000147615
+        },
+        "total_latency": {
+          "mean_ms": 15.616778946040492,
+          "median_ms": 14.879199996357784,
+          "p95_ms": 30.43199999956414
+        }
+      },
+      {
+        "name": "top_k_3",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 3,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.6666666666666666,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.9837969484171277,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 12.226021052476042,
+          "median_ms": 11.737900000298396,
+          "p95_ms": 19.101300000329502
+        },
+        "total_latency": {
+          "mean_ms": 12.320399999321365,
+          "median_ms": 11.772999998356681,
+          "p95_ms": 19.204399999580346
+        }
+      },
+      {
+        "name": "top_k_5",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.7777777777777778,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.98499128865912,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 12.380636841331388,
+          "median_ms": 11.624799997662194,
+          "p95_ms": 20.552900001348462
+        },
+        "total_latency": {
+          "mean_ms": 12.535199999738802,
+          "median_ms": 11.800899999798276,
+          "p95_ms": 20.7010000012815
+        }
+      },
+      {
+        "name": "top_k_8",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 8,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.7777777777777778,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.9865869608962397,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 11.941884210452708,
+          "median_ms": 11.55270000163,
+          "p95_ms": 20.474299999477807
+        },
+        "total_latency": {
+          "mean_ms": 12.173215788942272,
+          "median_ms": 11.825699999462813,
+          "p95_ms": 20.685200004663784
+        }
+      }
+    ],
+    "similarity_threshold": [
+      {
+        "name": "threshold_m1_0",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": -1.0,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.7777777777777778,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.98499128865912,
+        "unsupported_refusal_rate": 0,
+        "retrieval_latency": {
+          "mean_ms": 11.391384210774527,
+          "median_ms": 10.777600000437815,
+          "p95_ms": 23.346399997535627
+        },
+        "total_latency": {
+          "mean_ms": 11.537578947211028,
+          "median_ms": 11.007699999026954,
+          "p95_ms": 23.499100003391504
+        }
+      },
+      {
+        "name": "threshold_0_15",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": 0.15,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.7777777777777778,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.9334638687106475,
+        "unsupported_refusal_rate": 1,
+        "retrieval_latency": {
+          "mean_ms": 12.680631578979572,
+          "median_ms": 12.387399998260662,
+          "p95_ms": 20.713900004921015
+        },
+        "total_latency": {
+          "mean_ms": 12.82237894874446,
+          "median_ms": 12.536100002762396,
+          "p95_ms": 20.858700001554098
+        }
+      },
+      {
+        "name": "threshold_0_2",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": 0.2,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.7777777777777778,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.9334638687106475,
+        "unsupported_refusal_rate": 1,
+        "retrieval_latency": {
+          "mean_ms": 12.322873683986376,
+          "median_ms": 11.701099996571429,
+          "p95_ms": 22.991799996816553
+        },
+        "total_latency": {
+          "mean_ms": 12.461226315951391,
+          "median_ms": 11.857899989990983,
+          "p95_ms": 23.148599997512065
+        }
+      },
+      {
+        "name": "threshold_0_3",
+        "configuration": {
+          "chunk_size": 256,
+          "chunk_overlap": 100,
+          "top_k": 5,
+          "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+          "similarity_threshold": 0.3,
+          "llm_provider": "mock",
+          "llm_model": "mock-model"
+        },
+        "index_stats": {
+          "document_count": 2,
+          "chunk_count": 211,
+          "unique_content_hashes": 2,
+          "page_count": 99
+        },
+        "retrieval_hit_at_k": 1,
+        "page_hit_at_k": 0.7777777777777778,
+        "supported_answer_token_f1_mean": 0.1216898344307187,
+        "supported_answer_embedding_cosine_mean": 0.6301177077823215,
+        "groundedness_token_overlap_mean": 0.9334638687106475,
+        "unsupported_refusal_rate": 1,
+        "retrieval_latency": {
+          "mean_ms": 12.681252630978921,
+          "median_ms": 11.575800002901815,
+          "p95_ms": 23.490200001106132
+        },
+        "total_latency": {
+          "mean_ms": 12.825673683868157,
+          "median_ms": 11.698300004354678,
+          "p95_ms": 23.6503000051016
+        }
+      }
+    ],
+    "embedding_model": {
+      "experiment": "embedding_model",
+      "status": "blocked",
+      "configuration": {
+        "chunk_size": 512,
+        "chunk_overlap": 50,
+        "top_k": 5,
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "llm_provider": "mock",
+        "llm_model": "mock-model",
+        "similarity_threshold": -1.0
+      },
+      "current_model": {
+        "name": "sentence-transformers/all-MiniLM-L6-v2",
+        "dimension": 384,
+        "evaluated_in": "baseline.json"
+      },
+      "alternatives_considered": [
+        "sentence-transformers/paraphrase-MiniLM-L3-v2"
+      ],
+      "blocked_reason": "The alternative model is not present in the local Hugging Face cache and network access is unavailable. No comparison is reported rather than fabricating a result."
+    }
+  },
+  "best_configuration_by_parameter": {
+    "chunk_size": {
+      "chunk_size": 256,
+      "chunk_overlap": 25,
+      "top_k": 5,
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "similarity_threshold": -1.0,
+      "llm_provider": "mock",
+      "llm_model": "mock-model"
+    },
+    "chunk_overlap": {
+      "chunk_size": 256,
+      "chunk_overlap": 100,
+      "top_k": 5,
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "similarity_threshold": -1.0,
+      "llm_provider": "mock",
+      "llm_model": "mock-model"
+    },
+    "top_k": {
+      "chunk_size": 256,
+      "chunk_overlap": 100,
+      "top_k": 5,
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "similarity_threshold": -1.0,
+      "llm_provider": "mock",
+      "llm_model": "mock-model"
+    },
+    "similarity_threshold": {
+      "chunk_size": 256,
+      "chunk_overlap": 100,
+      "top_k": 5,
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "similarity_threshold": 0.15,
+      "llm_provider": "mock",
+      "llm_model": "mock-model"
+    },
+    "embedding_model": "baseline retained; alternative evaluation blocked"
+  },
+  "threshold_score_distribution": {
+    "all": {
+      "count": 95,
+      "min": 0.07296615839004517,
+      "max": 0.7566840648651123,
+      "mean": 0.5337947493321017
+    },
+    "supported": {
+      "count": 90,
+      "min": 0.2664428651332855,
+      "max": 0.7566840648651123,
+      "mean": 0.5582054085201688
+    },
+    "unsupported": {
+      "count": 5,
+      "min": 0.07296615839004517,
+      "max": 0.13044410943984985,
+      "mean": 0.0944028839468956
+    },
+    "threshold_candidates": [
+      -1.0,
+      0.15,
+      0.2,
+      0.3
+    ],
+    "candidate_rationale": "The unsupported top-k score maximum is below the supported minimum in the baseline; 0.15 and 0.20 test a separation margin, while 0.30 tests a stricter recall/precision trade-off."
+  },
+  "recommended_configuration": {
+    "chunk_size": 256,
+    "chunk_overlap": 100,
+    "top_k": 5,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.15,
+    "llm_provider": "mock",
+    "llm_model": "mock-model"
+  },
+  "selection_rule": "Prioritized page-level retrieval hit, then source retrieval hit, then embedding/lexical answer diagnostics, then lower top_k for equal recall, lower total latency, and chunk count. Threshold selection prioritized unsupported refusal and retrieval, then the least aggressive threshold that preserved those metrics.",
+  "limitations": [
+    "All experiments use the deterministic mock provider; answer metrics are diagnostics, not real LLM performance.",
+    "Filename hit@k is coarse because all supported questions target the same PDF.",
+    "Page metadata denotes the first page of a chunk; chunks may span page boundaries.",
+    "The alternative embedding model was not cached and could not be downloaded in this environment."
+  ],
+  "observations": [
+    "Chunk-size and overlap effects should be interpreted jointly with chunk count and latency.",
+    "Increasing top-k can improve page recall while adding context and latency.",
+    "The baseline score distribution places the unsupported question below the supported-question minimum, making threshold candidates around 0.15–0.30 experimentally meaningful."
+  ],
+  "next_research_questions": [
+    "Does a real instruction-tuned provider improve answer correctness and unsupported refusal compared with the mock diagnostic?",
+    "Would page-bounded chunks or page-range metadata improve citation accuracy?",
+    "How stable are the parameter rankings across additional documents and datasets?"
+  ]
+}

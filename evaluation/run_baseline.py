@@ -31,11 +31,16 @@ from app.services.rag_pipeline import RAGPipeline
 TOKEN_PATTERN = re.compile(r"[A-Za-z0-9]+")
 REFUSAL_PHRASES = (
     "not enough",
+    "could not find enough",
+    "couldn't find enough",
     "insufficient",
     "cannot answer",
     "can't answer",
+    "could not answer",
+    "couldn't answer",
     "not provided",
     "not contain",
+    "no relevant information",
     "unsupported",
     "do not know",
 )

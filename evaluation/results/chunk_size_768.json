@@ -1,0 +1,1312 @@
+{
+  "experiment": "chunk_size_768",
+  "created_at": "2026-08-20T21:36:42.374994+00:00",
+  "dataset": "C:\\Users\\bhuva\\OneDrive\\Documents\\Your Own AI\\evaluation\\questions.json",
+  "configuration": {
+    "chunk_size": 768,
+    "chunk_overlap": 75,
+    "top_k": 5,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": -1.0,
+    "llm_provider": "mock",
+    "llm_model": "mock-model"
+  },
+  "metric_notes": {
+    "retrieval_relevance": "retrieval_hit is a filename hit@top_k; page_hit requires a returned chunk page to overlap expected_pages.",
+    "answer_token_f1": "lexical overlap proxy, not a human correctness judgment.",
+    "answer_embedding_cosine": "cosine similarity using the configured embedding model; diagnostic only.",
+    "groundedness_token_overlap": "fraction of answer tokens also present in retrieved context; diagnostic only.",
+    "unsupported_answer_correct": "true only when the answer contains a refusal/insufficiency phrase."
+  },
+  "summary": {
+    "question_count": 19,
+    "completed_count": 19,
+    "failure_count": 0,
+    "retrieval_hit_at_k": 1,
+    "page_hit_at_k": 0.3888888888888889,
+    "supported_answer_token_f1_mean": 0.04073546767757401,
+    "supported_answer_embedding_cosine_mean": 0.5670309530364143,
+    "groundedness_token_overlap_mean": 0.9955002241719996,
+    "unsupported_refusal_rate": 0,
+    "retrieval_latency": {
+      "mean_ms": 11.324473684668957,
+      "median_ms": 10.711200004152488,
+      "p95_ms": 22.39420000114478
+    },
+    "generation_latency": {
+      "mean_ms": 0.3906947363008696,
+      "median_ms": 0.40330000047106296,
+      "p95_ms": 0.4410999972606078
+    },
+    "total_latency": {
+      "mean_ms": 11.715168420969826,
+      "median_ms": 11.102500000561122,
+      "p95_ms": 22.829699999419972
+    }
+  },
+  "records": [
+    {
+      "id": "cloud-001",
+      "question": "What is cloud computing?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        2,
+        3
+      ],
+      "answer": "Based on the provided context: UNIT - 1 Introduction to Cloud Computing Cloud Computing is the delivery of computing services such as servers, storage, databases, networking, software, analytics, intelligence, and more, over the Cloud (Internet). Cloud Computing provides an alternative to the on-premises datacentre. With an on-premises datacentre, we have to manage everything, such as purchasing and installing hardware, virtualization, installing the operating system, and any other required applications, setting up the network, configuring the firewall, and setting up storage for data. After doing all the set-up, we become responsible for maintaining it through its entire lifecycle. The cloud environment provides an easily accessible online portal that makes handy for the user to manage the compute, storage, network, and application resources. Some cloud service providers are: Cloud refer to the servers that are accessed over the internet. 2 It means storing, managing and accessing the data and programs on the remote servers that are hosted on internet instead of computers hard derive. Cloud computing is the on-demand availability of computer system resources. We store manage and process data on remote servers. ❖ Service providers: - 1. Google cloud. 2. AWS (Amazon Web Services). 3. Microsoft Azure. 4. IBM cloud. 5. Alibaba cloud. ❖ Types of cloud: - 1. Public (Accessible to all). 2. Private (Services accessible within a specific organization). 3. Hybrid (Public + Private cloud features). 4. Community (Services accessible by a group of organizations). 3 Cloud Computing Technologies ❖ A list of cloud computing technologies is given below - 1. Virtualization: - Virtualization is the process of creating a virtual environment to run multiple applications and operating systems on the same server. The virtual environment can be anything, such as a single instance or a combination of many operating systems, storage devices, network application servers, and other environments. The concept of Virtualization in cloud computing increases the use of virtual machines. ❖ Types of Virtualization: - 1. Hardware virtualization 2. Server virtualization 3. Storage virtualization 4. Operating system virtualization 5. Data Virtualization 2. Service-Oriented Architecture (SOA): - Service-Oriented Architecture (SOA) allows organizations to access on-demand cloud-based computing solutions according to the change of business needs. It can work without or with cloud computing. The advantages of using SOA is that it is easy to maintain, platform independent, and highly scalable. Service Provider and Service consumer are the two major roles within SOA. ❖ Applications of Service-Oriented Architecture: - • It is used in the healthcare industry. • It is used to create many mobile applications and games. • In the air force, SOA infrastructure is used to deploy situational awareness systems. 3. Grid Computing: - Grid computing is also known as distributed computing. It is a processor architecture that combines various different computing resources from multiple locations to achieve a common goal. In grid computing, the grid is connected by parallel nodes to form a computer cluster. These computer clusters are in different sizes and can run on any operating system. ❖ Grid computing contains the following three types of machines - 1. Control Node: It is a group of server which administrates the whole network. 2. Provider: It is a computer which contributes its resources in the network resource pool. 3. User: It is a computer which uses the resources on the network. Mainly, grid computing is used in the ATMs, back-end infrastructures, and marketing research. 4. Utility Computing: - Utility computing is the most trending IT service model. It provides on-demand computing resources (computation, storage, and programming services via API) and infrastructure based on the pay per use method. It minimizes the associated costs and maximizes the efficient use of resources. The advantage of utility computing is that it reduced the IT cost, provides greater flexibility, and easier to manage. Large organizations such as Google and Amazon established their own utility services for computing storage and application. 4 History of Cloud Computing Before Computing was come into existence, client Server Architecture was used where all the data and control of client resides in Server side. If a single user want to access some data, firstly user need to connect to the server and after that user will get appropriate access. But it has many disadvantages. So, After Client Server computing, Distributed Computing was come into existence, in this type of computing all computers are networked together with the help of this, user can share their resources when needed. It also has certain limitations. So in order to remove limitations faced in distributed system, cloud computing was emerged. ❖ Evaluation of cloud computing: - 1. Grid computing: - 1. Solving large problems with parallel computing. 2. Made mainstream by Globus",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 1,
+          "score": 0.730265736579895,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 7,
+          "rank": 2,
+          "score": 0.6352219581604004,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0003"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 3,
+          "score": 0.6213853359222412,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 5,
+          "rank": 4,
+          "score": 0.6072225570678711,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0002"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 99,
+          "rank": 5,
+          "score": 0.5991829037666321,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0046"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": true,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.07575757575757575,
+      "answer_embedding_cosine": 0.8211519122123718,
+      "groundedness_token_overlap": 0.9932659932659933,
+      "timing": {
+        "retrieval_ms": 22.39420000114478,
+        "generation_ms": 0.4354999982751906,
+        "total_ms": 22.829699999419972
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-002",
+      "question": "Which cloud service providers are listed in the notes?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        3
+      ],
+      "answer": "Based on the provided context: servers, databases, storage, analytics, networking, applications, and intelligence, are rented by businesses. As a result, businesses do not need to invest in data centres or computing facilities. They actually pay for the services they offer. ❖ Types of Cloud Platforms: - Cloud systems come in a range of shapes and sizes. None of them are suitable for all. To meet the varying needs of consumers, a range of models, forms, and services are available. They are as follows: 1. Public Cloud: Third-party providers that distribute computing services over the Internet are known as public cloud platforms. A few good examples of trending and mostly used cloud platform are Google Cloud Platform, AWS (Amazon Web Services), Microsoft Azure, Alibaba and IBM Bluemix. 2. Private Cloud: A private cloud is normally hosted by a third-party service provider or in an on-site data centre. A private cloud platform is always dedicated to a single company and it is the key difference between the public and private cloud. Or we can say that a private cloud is a series of cloud computing services used primarily by one corporation or organization. 3. Hybrid Cloud: The type of cloud architecture that combines both the public and private cloud systems is termed to as a Hybrid cloud platform. Data and programs are easily migrated from one to the other. This allows the company to be more flexible while still improving infrastructure, security, and enforcement. Organizations can use a cloud platform to develop cloud-native software, test and build them, and store, back up, and recover data. The major role of it is that will not only help the company to grow but also it helps to perform the data analysis with the help of different algorithms and the results can be a true deal breaker. Streaming video and audio, embedding information into activities, and providing applications on-demand on a global scale are all possibilities. Simply stated, cloud computing is the distribution of computing services over the Internet (\"the cloud\") in order to provide quicker innovation, more versatile resources, and economies of scale. We usually only pay for the cloud services that we use, which helps us to cut costs, operate our infrastructure more effectively, and scale as our company grows. 97 Protein Structure Prediction Cloud computing is an emerging technology that provides various computing services on demand. It provides convenient access to a shared pool of higher-level services and other system resources. Nowadays, cloud computing has a great significance in the fields of geology, biology, and other scientific research areas. Protein structure prediction is the best example in research area that makes use of cloud applications for its computation and storage. A protein is composed of long chains of amino acids joined together by peptide bonds. The various structures of protein help in the designing of new drugs and the various sequences of proteins from its three-dimensional structure in predictive form is known as a Protein structure prediction. Firstly primary structures of proteins are formed and then prediction of the secondary, tertiary and quaternary structures are done from the primary one. In this way predictions of protein structures are done. Protein structure prediction also makes use of various other technologies like artificial neural networks, artificial intelligence, machine learning and probabilistic techniques, also holds great importance in fields like theoretical chemistry and bioinformatics. There are various algorithms and tools that exists for protein structure prediction. CASP (Critical Assessment of Protein Structure Prediction) is a well-known tool that provides methods for automated web servers and the results of research work are placed on clouds like CAMEO (Continuous Automated Model Evaluation) server. These servers can be accessed by anyone as per their requirements from any place. Some of the tools or servers used in protein structure prediction are Phobius, FoldX, LOMETS, Prime, Predict protein, SignalP, BBSP, EVfold, Biskit, HHpred, Phre, ESyired3D. Using these tools new structures are predicted and the results are placed on the cloud-based servers. 98 Cloud Computing and Data Analytics Cloud Computing: Cloud Computing is a technique in which a network of remote servers is hosted on the Internet. These servers primarily store the data, manage the data, and process the data. But this is not done by a local server or a personal computer. In short, data here is gathered on the internet. Thus, eliminating the use of a physical server. Cloud Computing doesn’t depend on data analytics for anything. Data Analytics: Data analysis is defined as a process where data is inspected, cleaned, transformed, and modeled. The primary aim of data analytics is to discover information that is useful. So that a conclusion is",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 1,
+          "score": 0.5521246194839478,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 2,
+          "score": 0.5493403673171997,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 25,
+          "rank": 3,
+          "score": 0.5479548573493958,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0010"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 16,
+          "rank": 4,
+          "score": 0.5115850567817688,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0007"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 29,
+          "rank": 5,
+          "score": 0.45997893810272217,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0011"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.025220680958385876,
+      "answer_embedding_cosine": 0.6024850606918335,
+      "groundedness_token_overlap": 0.9970414201183432,
+      "timing": {
+        "retrieval_ms": 11.523000001034234,
+        "generation_ms": 0.38810000114608556,
+        "total_ms": 11.91110000218032
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-003",
+      "question": "What are the different types of cloud deployment models described in the notes?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        3,
+        22,
+        24
+      ],
+      "answer": "Based on the provided context: multiple cloud providers and services can be higher than using a single provider. 3. Compatibility issues: Different cloud providers may use different technologies and standards, which can cause compatibility issues and require additional resources to resolve. 4. Limited interoperability: Different cloud providers may not be able to interoperate seamlessly, which can limit the ability to move data and applications between them. 25 Cloud Service Models ❖ There are the following three types of cloud service models - 1. Infrastructure as a Service (IaaS): IaaS is also known as Hardware as a Service (HaaS). It is a computing infrastructure managed over the internet. The main advantage of using IaaS is that it helps users to avoid the cost and complexity of purchasing and managing the physical servers. ❖ Characteristics of IaaS: There are the following characteristics of IaaS: o Resources are available as a service o Services are highly scalable o Dynamic and flexible o GUI and API-based access o Automated administrative tasks Example: Digital Ocean, Linode, Amazon Web Services (AWS), Microsoft Azure, Google Compute Engine (GCE), Rackspace, and Cisco Metacloud. 2. Platform as a Service (PaaS): PaaS cloud computing platform is created for the programmer to develop, test, run, and manage the applications. ❖ Characteristics of PaaS: There are the following characteristics of PaaS - o Accessible to various users via the same development application. o Integrates with web services and databases. o Builds on virtualization technology, so resources can easily be scaled up or down as per the organization's need. 26 o Support multiple languages and frameworks. o Provides an ability to \"Auto-scale\". Example: AWS Elastic Beanstalk, Windows Azure, Heroku, Force.com, Google App Engine, Apache Stratos, Magento Commerce Cloud, and OpenShift. 3. Software as a Service (SaaS): SaaS is also known as \"on-demand software\". It is a software in which the applications are hosted by a cloud service provider. Users can access these applications with the help of internet connection and web browser. ❖ Characteristics of SaaS: There are the following characteristics of SaaS - o Managed from a central location o Hosted on a remote server o Accessible over the internet o Users are not responsible for hardware and software updates. Updates are applied automatically. o The services are purchased on the pay-as-per-use basis Example: BigCommerce, Google Apps, Salesforce, Dropbox, ZenDesk, Cisco WebEx, ZenDesk, Slack, and GoToMeeting. 27 ❖ Difference between IaaS, PaaS, and SaaS: The below table shows the difference between IaaS, PaaS, and SaaS - IaaS Paas SaaS It provides a virtual data center to store It provides virtual platforms and It provides web software and information and create platforms for app tools to create, test, and deploy apps to complete business development, testing, and deployment. apps. tasks. It provides access to resources such as virtual It provides runtime environments It provides software as a machines, virtual storage, etc. and deployment tools for service to the end-users. applications. It is used by network architects. It is used by developers. It is used by end users. IaaS provides only Infrastructure. PaaS provides Infrastructure + SaaS provides Infrastructure + Platform. Platform + Software. 28 Data Center in Cloud Computing A data center - also known as a data center is a facility made up of networked computers, storage systems, and computing infrastructure that businesses and other organizations use to organize, process, store large amounts of data. And to broadcast. Enterprise data centers increasingly incorporate cloud computing resources and facilities to secure and protect in- house, onsite resources. ❖ How do Data Centers work? • systems for storing, sharing, accessing, and processing data across the organization; • physical infrastructure to support data processing and data communication; And • Utilities such as cooling, electricity, network access, and uninterruptible power supplies (UPS). ❖ Why are data centers important? Data centers enable organizations to concentrate their processing power, which in turn enables the organization to focus its attention on: • IT and data processing personnel; • computing and network connectivity infrastructure; And • Computing Facility Security. ❖ What are the main components of Data Centers? 1. Calculation 2. enterprise data storage 3. networking ❖ How are Datacenters managed? • Facilities Management. Management of a physical data center facility may include duties related to the facility's real estate, utilities, access control, and personnel. • Datacenter inventory or asset management. Datacenter features include hardware assets and software licensing, and release management. • Datacenter Infrastructure Management. DCIM lies at the intersection of IT and facility management and is typically accomplished by monitoring data center performance to optimize energy, equipment, and floor use. • Technical support. The data center provides technical services to the",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 25,
+          "rank": 1,
+          "score": 0.5877890586853027,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0010"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 2,
+          "score": 0.5702916383743286,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 16,
+          "rank": 3,
+          "score": 0.5690069794654846,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0007"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 4,
+          "score": 0.5668104887008667,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 94,
+          "rank": 5,
+          "score": 0.5408897399902344,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0044"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.013037809647979138,
+      "answer_embedding_cosine": 0.45519396662712097,
+      "groundedness_token_overlap": 0.9934640522875817,
+      "timing": {
+        "retrieval_ms": 11.205900002096314,
+        "generation_ms": 0.4410999972606078,
+        "total_ms": 11.646999999356922
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-004",
+      "question": "What is virtualization in cloud computing?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        4
+      ],
+      "answer": "Based on the provided context: If we are running the updated version of the hypervisor then we must have already got the KVM integrated into the Linux kernel in 2007. 2. The Type 2 hypervisor: - It is also known as a hosted hypervisor, The type 2 hypervisor is a software layer or framework that runs on a traditional operating system. It operates by separating the guest and host operating systems. The host operating system schedules VM services, which are then executed on the hardware. Individual users who wish to operate multiple operating systems on a personal computer should use a form 2 hypervisor. This type of hypervisor also includes the virtual machines with it. Hardware acceleration technology improves the processing speed of both bare-metal and hosted hypervisors, allowing them to build and handle virtual resources more quickly. On a single physical computer, all types of hypervisors will operate multiple virtual servers for multiple tenants. Different businesses rent data space on various virtual servers from public cloud service providers. One server can host multiple virtual servers, each of which is running different workloads for different businesses. ❖ What is a cloud hypervisor? Hypervisors are a key component of the technology that enables cloud computing since they are a software layer that allows one host device to support several virtual machines at the same time. Hypervisors allow IT to retain control over a cloud environment's infrastructure, processes, and sensitive data while making cloud-based applications accessible to users in a virtual environment. Increased emphasis on creative applications is being driven by digital transformation and increasing consumer expectations. As a result, many businesses are transferring their virtual computers to the cloud. Having to rewrite any existing application for the cloud, on the other hand, will eat up valuable IT resources and create infrastructure silos. A hypervisor also helps in the rapid migration of applications to the cloud as being a part of a virtualization platform. As a result, businesses will take advantage of the cloud's many advantages, such as lower hardware costs, improved accessibility, and increased scalability, for a quicker return on investment. 52 ➢ Benefits of hypervisors: - Using a hypervisor to host several virtual machines has many advantages: • Speed: The hypervisors allow virtual machines to be built instantly unlike bare-metal servers. This makes provisioning resources for complex workloads much simpler. • Efficiency: Hypervisors that run multiple virtual machines on the resources of a single physical machine often allow for more effective use of a single physical server. • Flexibility: Since the hypervisor distinguishes the OS from the underlying hardware, the program no longer relies on particular hardware devices or drivers, bare-metal hypervisors enable operating systems and their related applications to operate on a variety of hardware types. • Portability: Multiple operating systems can run on the same physical server thanks to hypervisors (host machine). The hypervisor's virtual machines are portable because they are separate from the physical computer. 53 Kernel-Based Virtual Machine (KVM) Kernel-Based Virtual Machine (KVM) is an open source virtualization module directly built into the Linux kernel, enabling Linux OS to function as a Type 1 (bare-metal) hypervisor. However, worth noting is that the distinction between Type 1 and Type 2 hypervisors can be blurred with KVM, as it can function as either of the two. Furthermore, it enables the hypervisor to deploy separate virtual machines. ❖ KVM Advantages: - 1. Since the KVM module is built into the Linux kernel, it comes built-in with most Linux distributions. 2. KVM is open source, which means it's free to use, regularly updated, and very secure due to being part of the world's largest open source community. 3. KVM is very stable and has excellent performance with suitable hardware. 4. KVM has fantastic command-line options with a polished GUI interface. ❖ KVM Disadvantages: - 1. Depending on a user's needs and infrastructure, the host hardware needs to be robust. 2. Because KVM is a Linux kernel module, it can't run on most operating systems with a few exceptions, such as FreeBSD and illumos. 3. Centralized hardware, which can be problematic in cases of failure. ❖ KVM Features: - 1. Scalability and Clustering: - KVM is an excellent solution for scalability and clustering. As resource demand increases, you can deploy the desired amount of VMs to meet all the workload needs and fine-tune them for specific tasks. Additionally, you can use KVM to set up server clusters or private clouds, such as OpenStack. 2. Virtio Devices and Hardware: - Virtio is a virtualization standard primarily for storage and network devices used as the primary input/output (IO) virtualization platform in KVM. It enables high performance",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 52,
+          "rank": 1,
+          "score": 0.6413620114326477,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0021"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 2,
+          "score": 0.6257153749465942,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 69,
+          "rank": 3,
+          "score": 0.6219274997711182,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0032"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 60,
+          "rank": 4,
+          "score": 0.6054278612136841,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0026"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 41,
+          "rank": 5,
+          "score": 0.591185450553894,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0016"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.06,
+      "answer_embedding_cosine": 0.6893351078033447,
+      "groundedness_token_overlap": 0.9936102236421726,
+      "timing": {
+        "retrieval_ms": 10.970499999530148,
+        "generation_ms": 0.41570000030333176,
+        "total_ms": 11.38619999983348
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-005",
+      "question": "What is Service-Oriented Architecture (SOA), and how does it help organizations?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        4
+      ],
+      "answer": "Based on the provided context: The application layer is also heavily used by enterprises in business marketing and sales, consumer relationship management (CRM), financial transactions, and supply chain management. It should be noted that not all cloud services are restricted to a single layer. Many applications may apply resources at mixed layers. After all, the three layers are built from the bottom up with a dependence relationship. In general, SaaS demands the most work from the provider, PaaS is in the middle, and IaaS demands the least. The SLA resource allocator acts as the interface between the data center/cloud service provider and external users. When a service request is first submitted, the service request examiner interprets the submitted request for QoS requirements before determining whether to accept or reject the request. The Accounting mechanism maintains the actual usage of resources by requests so that the final cost can be computed and charged to users. The VM monitor mechanism keeps track of the availability of VMs and their resource entitlements. The service request monitor mechanism keeps track of the execution progress of service requests. Multiple VMs can concurrently run applications based on different operating system environments on a single physical machine since the VMs are isolated from one another on the same physical machine. ❖ Architectural Design Challenges: - 1. Service availability and data lock-in problem. 2. Data privacy and security. 3. Unpredictable performance and bottlenecks. 4. Distributed storage and widespread bugs. 5. Cloud scalability, interoperability, and standardization. 6. Software licensing. 7. Service Availability and Data lock-in problem. 8. Unpredictable performance and bottlenecks. 9. Distributed storage and widespread bugs. 32 Parallel Computing and Distributed Computing ❖ What is Parallel Computing? It is also known as parallel processing. It utilizes several processors. A shared memory or distributed memory system can be used to assist in parallel computing. All CPUs in shared memory systems share the memory. Memory is shared between the processors in distributed memory systems. Parallel computing helps to increase the CPU utilization and improve the performance because several processors work simultaneously. Moreover, the failure of one CPU has no impact on the other CPUs' functionality. Furthermore, if one processor needs instructions from another, the CPU might cause latency. ❖ Advantages: - 1. It saves time and money because many resources working together cut down on time and costs. 2. It may be difficult to resolve larger problems on Serial Computing. 3. You can do many things at once using many computing resources. 4. Parallel computing is much better than serial computing for modeling, simulating, and comprehending complicated real-world events. ❖ Disadvantages: - 1. The multi-core architectures consume a lot of power. 2. Parallel solutions are more difficult to implement, debug, and prove right due to the complexity of communication and coordination, and they frequently perform worse than their serial equivalents. ❖ What is Distributing Computing? It comprises several software components that reside on different systems but operate as a single system. A distributed system's computers can be physically close together and linked by a local network or geographically distant and linked by a wide area network (WAN). A distributed system can be made up of any number of different configurations, such as mainframes, PCs, workstations, and minicomputers. The main aim of distributed computing is to make a network work as a single computer. It enables scalability and makes it simpler to share resources. It also aids in the efficiency of computation processes. ❖ Advantages: - 1. It is flexible, making it simple to install, use, and debug new services. 2. In distributed computing, you may add multiple machines as required. 3. If the system crashes on one server, that doesn't affect other servers. 4. A distributed computer system may combine the computational capacity of several computers, making it faster than traditional systems. ❖ Disadvantages: - 1. Data security and sharing are the main issues in distributed systems due to the features of open systems 2. Because of the distribution across multiple servers, troubleshooting and diagnostics are more challenging. 3. The main disadvantage of distributed computer systems is the lack of software support. 33 ❖ Comparison between the Parallel Computing and Distributed Computing: - Features Parallel Computing Distributed Computing Definition It is a type of computation in It is that type of computing in which the components are which various processes runs located on various networked systems that interact and simultaneously. coordinate their actions by passing messages to one another. Communication The processors communicate The computer systems connect with one another via a with one another via a bus. network. Functionality Several processors execute Several computers execute tasks simultaneously. various tasks simultaneously in parallel",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 32,
+          "rank": 1,
+          "score": 0.512656569480896,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0012"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 25,
+          "rank": 2,
+          "score": 0.49334022402763367,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0010"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 87,
+          "rank": 3,
+          "score": 0.4221644401550293,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0041"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 29,
+          "rank": 4,
+          "score": 0.41489142179489136,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0011"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 94,
+          "rank": 5,
+          "score": 0.3966084122657776,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0044"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.03522012578616352,
+      "answer_embedding_cosine": 0.48982998728752136,
+      "groundedness_token_overlap": 0.9970238095238095,
+      "timing": {
+        "retrieval_ms": 10.541399999056011,
+        "generation_ms": 0.3437999985180795,
+        "total_ms": 10.885199997574091
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-006",
+      "question": "What are the two major roles within SOA?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        4
+      ],
+      "answer": "Based on the provided context: The application layer is also heavily used by enterprises in business marketing and sales, consumer relationship management (CRM), financial transactions, and supply chain management. It should be noted that not all cloud services are restricted to a single layer. Many applications may apply resources at mixed layers. After all, the three layers are built from the bottom up with a dependence relationship. In general, SaaS demands the most work from the provider, PaaS is in the middle, and IaaS demands the least. The SLA resource allocator acts as the interface between the data center/cloud service provider and external users. When a service request is first submitted, the service request examiner interprets the submitted request for QoS requirements before determining whether to accept or reject the request. The Accounting mechanism maintains the actual usage of resources by requests so that the final cost can be computed and charged to users. The VM monitor mechanism keeps track of the availability of VMs and their resource entitlements. The service request monitor mechanism keeps track of the execution progress of service requests. Multiple VMs can concurrently run applications based on different operating system environments on a single physical machine since the VMs are isolated from one another on the same physical machine. ❖ Architectural Design Challenges: - 1. Service availability and data lock-in problem. 2. Data privacy and security. 3. Unpredictable performance and bottlenecks. 4. Distributed storage and widespread bugs. 5. Cloud scalability, interoperability, and standardization. 6. Software licensing. 7. Service Availability and Data lock-in problem. 8. Unpredictable performance and bottlenecks. 9. Distributed storage and widespread bugs. 32 Parallel Computing and Distributed Computing ❖ What is Parallel Computing? It is also known as parallel processing. It utilizes several processors. A shared memory or distributed memory system can be used to assist in parallel computing. All CPUs in shared memory systems share the memory. Memory is shared between the processors in distributed memory systems. Parallel computing helps to increase the CPU utilization and improve the performance because several processors work simultaneously. Moreover, the failure of one CPU has no impact on the other CPUs' functionality. Furthermore, if one processor needs instructions from another, the CPU might cause latency. ❖ Advantages: - 1. It saves time and money because many resources working together cut down on time and costs. 2. It may be difficult to resolve larger problems on Serial Computing. 3. You can do many things at once using many computing resources. 4. Parallel computing is much better than serial computing for modeling, simulating, and comprehending complicated real-world events. ❖ Disadvantages: - 1. The multi-core architectures consume a lot of power. 2. Parallel solutions are more difficult to implement, debug, and prove right due to the complexity of communication and coordination, and they frequently perform worse than their serial equivalents. ❖ What is Distributing Computing? It comprises several software components that reside on different systems but operate as a single system. A distributed system's computers can be physically close together and linked by a local network or geographically distant and linked by a wide area network (WAN). A distributed system can be made up of any number of different configurations, such as mainframes, PCs, workstations, and minicomputers. The main aim of distributed computing is to make a network work as a single computer. It enables scalability and makes it simpler to share resources. It also aids in the efficiency of computation processes. ❖ Advantages: - 1. It is flexible, making it simple to install, use, and debug new services. 2. In distributed computing, you may add multiple machines as required. 3. If the system crashes on one server, that doesn't affect other servers. 4. A distributed computer system may combine the computational capacity of several computers, making it faster than traditional systems. ❖ Disadvantages: - 1. Data security and sharing are the main issues in distributed systems due to the features of open systems 2. Because of the distribution across multiple servers, troubleshooting and diagnostics are more challenging. 3. The main disadvantage of distributed computer systems is the lack of software support. 33 ❖ Comparison between the Parallel Computing and Distributed Computing: - Features Parallel Computing Distributed Computing Definition It is a type of computation in It is that type of computing in which the components are which various processes runs located on various networked systems that interact and simultaneously. coordinate their actions by passing messages to one another. Communication The processors communicate The computer systems connect with one another via a with one another via a bus. network. Functionality Several processors execute Several computers execute tasks simultaneously. various tasks simultaneously in parallel",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 32,
+          "rank": 1,
+          "score": 0.34258130192756653,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0012"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 25,
+          "rank": 2,
+          "score": 0.31248268485069275,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0010"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 66,
+          "rank": 3,
+          "score": 0.27083316445350647,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0030"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 29,
+          "rank": 4,
+          "score": 0.2627961337566376,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0011"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 94,
+          "rank": 5,
+          "score": 0.25539934635162354,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0044"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.023076923076923078,
+      "answer_embedding_cosine": 0.44705235958099365,
+      "groundedness_token_overlap": 0.9970238095238095,
+      "timing": {
+        "retrieval_ms": 10.71869999577757,
+        "generation_ms": 0.411000000895001,
+        "total_ms": 11.12969999667257
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-007",
+      "question": "What are some applications of Service-Oriented Architecture mentioned in the notes?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        4
+      ],
+      "answer": "Based on the provided context: The application layer is also heavily used by enterprises in business marketing and sales, consumer relationship management (CRM), financial transactions, and supply chain management. It should be noted that not all cloud services are restricted to a single layer. Many applications may apply resources at mixed layers. After all, the three layers are built from the bottom up with a dependence relationship. In general, SaaS demands the most work from the provider, PaaS is in the middle, and IaaS demands the least. The SLA resource allocator acts as the interface between the data center/cloud service provider and external users. When a service request is first submitted, the service request examiner interprets the submitted request for QoS requirements before determining whether to accept or reject the request. The Accounting mechanism maintains the actual usage of resources by requests so that the final cost can be computed and charged to users. The VM monitor mechanism keeps track of the availability of VMs and their resource entitlements. The service request monitor mechanism keeps track of the execution progress of service requests. Multiple VMs can concurrently run applications based on different operating system environments on a single physical machine since the VMs are isolated from one another on the same physical machine. ❖ Architectural Design Challenges: - 1. Service availability and data lock-in problem. 2. Data privacy and security. 3. Unpredictable performance and bottlenecks. 4. Distributed storage and widespread bugs. 5. Cloud scalability, interoperability, and standardization. 6. Software licensing. 7. Service Availability and Data lock-in problem. 8. Unpredictable performance and bottlenecks. 9. Distributed storage and widespread bugs. 32 Parallel Computing and Distributed Computing ❖ What is Parallel Computing? It is also known as parallel processing. It utilizes several processors. A shared memory or distributed memory system can be used to assist in parallel computing. All CPUs in shared memory systems share the memory. Memory is shared between the processors in distributed memory systems. Parallel computing helps to increase the CPU utilization and improve the performance because several processors work simultaneously. Moreover, the failure of one CPU has no impact on the other CPUs' functionality. Furthermore, if one processor needs instructions from another, the CPU might cause latency. ❖ Advantages: - 1. It saves time and money because many resources working together cut down on time and costs. 2. It may be difficult to resolve larger problems on Serial Computing. 3. You can do many things at once using many computing resources. 4. Parallel computing is much better than serial computing for modeling, simulating, and comprehending complicated real-world events. ❖ Disadvantages: - 1. The multi-core architectures consume a lot of power. 2. Parallel solutions are more difficult to implement, debug, and prove right due to the complexity of communication and coordination, and they frequently perform worse than their serial equivalents. ❖ What is Distributing Computing? It comprises several software components that reside on different systems but operate as a single system. A distributed system's computers can be physically close together and linked by a local network or geographically distant and linked by a wide area network (WAN). A distributed system can be made up of any number of different configurations, such as mainframes, PCs, workstations, and minicomputers. The main aim of distributed computing is to make a network work as a single computer. It enables scalability and makes it simpler to share resources. It also aids in the efficiency of computation processes. ❖ Advantages: - 1. It is flexible, making it simple to install, use, and debug new services. 2. In distributed computing, you may add multiple machines as required. 3. If the system crashes on one server, that doesn't affect other servers. 4. A distributed computer system may combine the computational capacity of several computers, making it faster than traditional systems. ❖ Disadvantages: - 1. Data security and sharing are the main issues in distributed systems due to the features of open systems 2. Because of the distribution across multiple servers, troubleshooting and diagnostics are more challenging. 3. The main disadvantage of distributed computer systems is the lack of software support. 33 ❖ Comparison between the Parallel Computing and Distributed Computing: - Features Parallel Computing Distributed Computing Definition It is a type of computation in It is that type of computing in which the components are which various processes runs located on various networked systems that interact and simultaneously. coordinate their actions by passing messages to one another. Communication The processors communicate The computer systems connect with one another via a with one another via a bus. network. Functionality Several processors execute Several computers execute tasks simultaneously. various tasks simultaneously in parallel",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 32,
+          "rank": 1,
+          "score": 0.4959266781806946,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0012"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 16,
+          "rank": 2,
+          "score": 0.47425273060798645,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0007"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 25,
+          "rank": 3,
+          "score": 0.463787704706192,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0010"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 19,
+          "rank": 4,
+          "score": 0.4608413279056549,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0008"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 94,
+          "rank": 5,
+          "score": 0.4314078092575073,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0044"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.01282051282051282,
+      "answer_embedding_cosine": 0.21733489632606506,
+      "groundedness_token_overlap": 0.9940476190476191,
+      "timing": {
+        "retrieval_ms": 11.184399998455774,
+        "generation_ms": 0.43619999632937834,
+        "total_ms": 11.620599994785152
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-008",
+      "question": "What are the major characteristics or features of cloud computing?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        7,
+        8
+      ],
+      "answer": "Based on the provided context: UNIT - 1 Introduction to Cloud Computing Cloud Computing is the delivery of computing services such as servers, storage, databases, networking, software, analytics, intelligence, and more, over the Cloud (Internet). Cloud Computing provides an alternative to the on-premises datacentre. With an on-premises datacentre, we have to manage everything, such as purchasing and installing hardware, virtualization, installing the operating system, and any other required applications, setting up the network, configuring the firewall, and setting up storage for data. After doing all the set-up, we become responsible for maintaining it through its entire lifecycle. The cloud environment provides an easily accessible online portal that makes handy for the user to manage the compute, storage, network, and application resources. Some cloud service providers are: Cloud refer to the servers that are accessed over the internet. 2 It means storing, managing and accessing the data and programs on the remote servers that are hosted on internet instead of computers hard derive. Cloud computing is the on-demand availability of computer system resources. We store manage and process data on remote servers. ❖ Service providers: - 1. Google cloud. 2. AWS (Amazon Web Services). 3. Microsoft Azure. 4. IBM cloud. 5. Alibaba cloud. ❖ Types of cloud: - 1. Public (Accessible to all). 2. Private (Services accessible within a specific organization). 3. Hybrid (Public + Private cloud features). 4. Community (Services accessible by a group of organizations). 3 Cloud Computing Technologies ❖ A list of cloud computing technologies is given below - 1. Virtualization: - Virtualization is the process of creating a virtual environment to run multiple applications and operating systems on the same server. The virtual environment can be anything, such as a single instance or a combination of many operating systems, storage devices, network application servers, and other environments. The concept of Virtualization in cloud computing increases the use of virtual machines. ❖ Types of Virtualization: - 1. Hardware virtualization 2. Server virtualization 3. Storage virtualization 4. Operating system virtualization 5. Data Virtualization 2. Service-Oriented Architecture (SOA): - Service-Oriented Architecture (SOA) allows organizations to access on-demand cloud-based computing solutions according to the change of business needs. It can work without or with cloud computing. The advantages of using SOA is that it is easy to maintain, platform independent, and highly scalable. Service Provider and Service consumer are the two major roles within SOA. ❖ Applications of Service-Oriented Architecture: - • It is used in the healthcare industry. • It is used to create many mobile applications and games. • In the air force, SOA infrastructure is used to deploy situational awareness systems. 3. Grid Computing: - Grid computing is also known as distributed computing. It is a processor architecture that combines various different computing resources from multiple locations to achieve a common goal. In grid computing, the grid is connected by parallel nodes to form a computer cluster. These computer clusters are in different sizes and can run on any operating system. ❖ Grid computing contains the following three types of machines - 1. Control Node: It is a group of server which administrates the whole network. 2. Provider: It is a computer which contributes its resources in the network resource pool. 3. User: It is a computer which uses the resources on the network. Mainly, grid computing is used in the ATMs, back-end infrastructures, and marketing research. 4. Utility Computing: - Utility computing is the most trending IT service model. It provides on-demand computing resources (computation, storage, and programming services via API) and infrastructure based on the pay per use method. It minimizes the associated costs and maximizes the efficient use of resources. The advantage of utility computing is that it reduced the IT cost, provides greater flexibility, and easier to manage. Large organizations such as Google and Amazon established their own utility services for computing storage and application. 4 History of Cloud Computing Before Computing was come into existence, client Server Architecture was used where all the data and control of client resides in Server side. If a single user want to access some data, firstly user need to connect to the server and after that user will get appropriate access. But it has many disadvantages. So, After Client Server computing, Distributed Computing was come into existence, in this type of computing all computers are networked together with the help of this, user can share their resources when needed. It also has certain limitations. So in order to remove limitations faced in distributed system, cloud computing was emerged. ❖ Evaluation of cloud computing: - 1. Grid computing: - 1. Solving large problems with parallel computing. 2. Made mainstream by Globus",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 1,
+          "score": 0.7020504474639893,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 5,
+          "rank": 2,
+          "score": 0.6673474907875061,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0002"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 7,
+          "rank": 3,
+          "score": 0.6567337512969971,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0003"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 4,
+          "score": 0.6314792633056641,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 29,
+          "rank": 5,
+          "score": 0.6224182844161987,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0011"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": true,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.03299492385786803,
+      "answer_embedding_cosine": 0.53017657995224,
+      "groundedness_token_overlap": 0.9966329966329966,
+      "timing": {
+        "retrieval_ms": 11.231100004806649,
+        "generation_ms": 0.44100000377511606,
+        "total_ms": 11.672100008581765
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-009",
+      "question": "How does cloud migration work, and what benefits are identified in the notes?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        10
+      ],
+      "answer": "Based on the provided context: UNIT - 1 Introduction to Cloud Computing Cloud Computing is the delivery of computing services such as servers, storage, databases, networking, software, analytics, intelligence, and more, over the Cloud (Internet). Cloud Computing provides an alternative to the on-premises datacentre. With an on-premises datacentre, we have to manage everything, such as purchasing and installing hardware, virtualization, installing the operating system, and any other required applications, setting up the network, configuring the firewall, and setting up storage for data. After doing all the set-up, we become responsible for maintaining it through its entire lifecycle. The cloud environment provides an easily accessible online portal that makes handy for the user to manage the compute, storage, network, and application resources. Some cloud service providers are: Cloud refer to the servers that are accessed over the internet. 2 It means storing, managing and accessing the data and programs on the remote servers that are hosted on internet instead of computers hard derive. Cloud computing is the on-demand availability of computer system resources. We store manage and process data on remote servers. ❖ Service providers: - 1. Google cloud. 2. AWS (Amazon Web Services). 3. Microsoft Azure. 4. IBM cloud. 5. Alibaba cloud. ❖ Types of cloud: - 1. Public (Accessible to all). 2. Private (Services accessible within a specific organization). 3. Hybrid (Public + Private cloud features). 4. Community (Services accessible by a group of organizations). 3 Cloud Computing Technologies ❖ A list of cloud computing technologies is given below - 1. Virtualization: - Virtualization is the process of creating a virtual environment to run multiple applications and operating systems on the same server. The virtual environment can be anything, such as a single instance or a combination of many operating systems, storage devices, network application servers, and other environments. The concept of Virtualization in cloud computing increases the use of virtual machines. ❖ Types of Virtualization: - 1. Hardware virtualization 2. Server virtualization 3. Storage virtualization 4. Operating system virtualization 5. Data Virtualization 2. Service-Oriented Architecture (SOA): - Service-Oriented Architecture (SOA) allows organizations to access on-demand cloud-based computing solutions according to the change of business needs. It can work without or with cloud computing. The advantages of using SOA is that it is easy to maintain, platform independent, and highly scalable. Service Provider and Service consumer are the two major roles within SOA. ❖ Applications of Service-Oriented Architecture: - • It is used in the healthcare industry. • It is used to create many mobile applications and games. • In the air force, SOA infrastructure is used to deploy situational awareness systems. 3. Grid Computing: - Grid computing is also known as distributed computing. It is a processor architecture that combines various different computing resources from multiple locations to achieve a common goal. In grid computing, the grid is connected by parallel nodes to form a computer cluster. These computer clusters are in different sizes and can run on any operating system. ❖ Grid computing contains the following three types of machines - 1. Control Node: It is a group of server which administrates the whole network. 2. Provider: It is a computer which contributes its resources in the network resource pool. 3. User: It is a computer which uses the resources on the network. Mainly, grid computing is used in the ATMs, back-end infrastructures, and marketing research. 4. Utility Computing: - Utility computing is the most trending IT service model. It provides on-demand computing resources (computation, storage, and programming services via API) and infrastructure based on the pay per use method. It minimizes the associated costs and maximizes the efficient use of resources. The advantage of utility computing is that it reduced the IT cost, provides greater flexibility, and easier to manage. Large organizations such as Google and Amazon established their own utility services for computing storage and application. 4 History of Cloud Computing Before Computing was come into existence, client Server Architecture was used where all the data and control of client resides in Server side. If a single user want to access some data, firstly user need to connect to the server and after that user will get appropriate access. But it has many disadvantages. So, After Client Server computing, Distributed Computing was come into existence, in this type of computing all computers are networked together with the help of this, user can share their resources when needed. It also has certain limitations. So in order to remove limitations faced in distributed system, cloud computing was emerged. ❖ Evaluation of cloud computing: - 1. Grid computing: - 1. Solving large problems with parallel computing. 2. Made mainstream by Globus",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 1,
+          "score": 0.5260580778121948,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 7,
+          "rank": 2,
+          "score": 0.5025871992111206,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0003"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 9,
+          "rank": 3,
+          "score": 0.48498469591140747,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0004"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 102,
+          "rank": 4,
+          "score": 0.464345246553421,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0048"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 22,
+          "rank": 5,
+          "score": 0.4638160467147827,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0009"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.060225846925972396,
+      "answer_embedding_cosine": 0.5921815633773804,
+      "groundedness_token_overlap": 0.9932659932659933,
+      "timing": {
+        "retrieval_ms": 10.407900001155213,
+        "generation_ms": 0.23430000146618113,
+        "total_ms": 10.642200002621394
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-010",
+      "question": "What is the pay-as-you-go model in cloud computing economics?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        12
+      ],
+      "answer": "Based on the provided context: UNIT - 1 Introduction to Cloud Computing Cloud Computing is the delivery of computing services such as servers, storage, databases, networking, software, analytics, intelligence, and more, over the Cloud (Internet). Cloud Computing provides an alternative to the on-premises datacentre. With an on-premises datacentre, we have to manage everything, such as purchasing and installing hardware, virtualization, installing the operating system, and any other required applications, setting up the network, configuring the firewall, and setting up storage for data. After doing all the set-up, we become responsible for maintaining it through its entire lifecycle. The cloud environment provides an easily accessible online portal that makes handy for the user to manage the compute, storage, network, and application resources. Some cloud service providers are: Cloud refer to the servers that are accessed over the internet. 2 It means storing, managing and accessing the data and programs on the remote servers that are hosted on internet instead of computers hard derive. Cloud computing is the on-demand availability of computer system resources. We store manage and process data on remote servers. ❖ Service providers: - 1. Google cloud. 2. AWS (Amazon Web Services). 3. Microsoft Azure. 4. IBM cloud. 5. Alibaba cloud. ❖ Types of cloud: - 1. Public (Accessible to all). 2. Private (Services accessible within a specific organization). 3. Hybrid (Public + Private cloud features). 4. Community (Services accessible by a group of organizations). 3 Cloud Computing Technologies ❖ A list of cloud computing technologies is given below - 1. Virtualization: - Virtualization is the process of creating a virtual environment to run multiple applications and operating systems on the same server. The virtual environment can be anything, such as a single instance or a combination of many operating systems, storage devices, network application servers, and other environments. The concept of Virtualization in cloud computing increases the use of virtual machines. ❖ Types of Virtualization: - 1. Hardware virtualization 2. Server virtualization 3. Storage virtualization 4. Operating system virtualization 5. Data Virtualization 2. Service-Oriented Architecture (SOA): - Service-Oriented Architecture (SOA) allows organizations to access on-demand cloud-based computing solutions according to the change of business needs. It can work without or with cloud computing. The advantages of using SOA is that it is easy to maintain, platform independent, and highly scalable. Service Provider and Service consumer are the two major roles within SOA. ❖ Applications of Service-Oriented Architecture: - • It is used in the healthcare industry. • It is used to create many mobile applications and games. • In the air force, SOA infrastructure is used to deploy situational awareness systems. 3. Grid Computing: - Grid computing is also known as distributed computing. It is a processor architecture that combines various different computing resources from multiple locations to achieve a common goal. In grid computing, the grid is connected by parallel nodes to form a computer cluster. These computer clusters are in different sizes and can run on any operating system. ❖ Grid computing contains the following three types of machines - 1. Control Node: It is a group of server which administrates the whole network. 2. Provider: It is a computer which contributes its resources in the network resource pool. 3. User: It is a computer which uses the resources on the network. Mainly, grid computing is used in the ATMs, back-end infrastructures, and marketing research. 4. Utility Computing: - Utility computing is the most trending IT service model. It provides on-demand computing resources (computation, storage, and programming services via API) and infrastructure based on the pay per use method. It minimizes the associated costs and maximizes the efficient use of resources. The advantage of utility computing is that it reduced the IT cost, provides greater flexibility, and easier to manage. Large organizations such as Google and Amazon established their own utility services for computing storage and application. 4 History of Cloud Computing Before Computing was come into existence, client Server Architecture was used where all the data and control of client resides in Server side. If a single user want to access some data, firstly user need to connect to the server and after that user will get appropriate access. But it has many disadvantages. So, After Client Server computing, Distributed Computing was come into existence, in this type of computing all computers are networked together with the help of this, user can share their resources when needed. It also has certain limitations. So in order to remove limitations faced in distributed system, cloud computing was emerged. ❖ Evaluation of cloud computing: - 1. Grid computing: - 1. Solving large problems with parallel computing. 2. Made mainstream by Globus",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 1,
+          "score": 0.5728567838668823,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 2,
+          "score": 0.5092079639434814,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 7,
+          "rank": 3,
+          "score": 0.5034225583076477,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0003"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 11,
+          "rank": 4,
+          "score": 0.49571192264556885,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0005"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 25,
+          "rank": 5,
+          "score": 0.4947139620780945,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0010"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.03571428571428572,
+      "answer_embedding_cosine": 0.440689355134964,
+      "groundedness_token_overlap": 0.9932659932659933,
+      "timing": {
+        "retrieval_ms": 11.852200004796032,
+        "generation_ms": 0.39679999463260174,
+        "total_ms": 12.248999999428634
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-011",
+      "question": "What are the main components of cloud computing architecture?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        8
+      ],
+      "answer": "Based on the provided context: data center facility may include duties related to the facility's real estate, utilities, access control, and personnel. • Datacenter inventory or asset management. Datacenter features include hardware assets and software licensing, and release management. • Datacenter Infrastructure Management. DCIM lies at the intersection of IT and facility management and is typically accomplished by monitoring data center performance to optimize energy, equipment, and floor use. • Technical support. The data center provides technical services to the organization, and as such, it should also provide technical support to the end-users of the enterprise. 29 Architecture of Cloud Computing Starting from small to medium and medium to large, every organization use cloud computing services for storing information and accessing it from anywhere and any time only with the help of internet. Transparency, scalability, security and intelligent monitoring are some of the most important constraints which every cloud infrastructure should experience. ❖ Cloud Computing Architecture: - The cloud architecture is divided into 2 parts: 1. Frontend 2. Backend Architecture of cloud computing is the combination of both SOA (Service Oriented Architecture) and EDA (Event Driven Architecture). Client infrastructure, application, service, runtime cloud, storage, infrastructure, management and security all these are the components of cloud computing architecture. 1. Frontend: Frontend of the cloud architecture refers to the client side of cloud computing system. Means it contains all the user interfaces and applications which are used by the client to access the cloud computing services/resources. 2. Backend: Backend refers to the cloud itself which is used by the service provider. It contains the resources as well as manages the resources and provides security mechanisms. 30 ❖ Benefits of Cloud Computing Architecture: - • Makes overall cloud computing system simpler. • Improves data processing requirements. • Helps in providing high security. • Makes it more modularized. • Results in better disaster recovery. • Gives good user accessibility. • Reduces IT operating costs. • Provides high level reliability. • Scalability. ❖ Cloud platform design goals: - Four major design goals of a cloud computing platform. 1. Scalability. 2. Virtualization. 3. Efficiency. 4. Reliability. System scalability can benefit from cluster architecture. If one service takes a lot of processing power, storage capacity, or network traffic, it is simple to add more servers and band width. The scale of the cloud architecture can be easily expanded by adding more servers and enlarging the network connectivity accordingly. System reliability can benefit from this architecture. Data can be put into multiple locations. Goal of virtualization is to centralize administrative tasks while improving scalability and workloads. The internet cloud is imagined as a massive cluster of servers. The different resources(Space, Data, and Speed) of the concerned servers are allocated as per demand dynamically. In general, private clouds are easier to manage, and public clouds are easier to access. The trends in cloud development are that more and more clouds will be hybrid. One must learn how to create a private cloud and how to interact with public clouds in the open internet. Security becomes a critical issue in safeguarding the operation of all cloud types. ❖ The architecture of a cloud is developed at three layers: - 1. Infrastructure. 2. Platform. 3. Application/Software. These three development layers are implemented with virtualization and standardization of hardware and software resources provisioned in the cloud. The infrastructure layer serves as the foundation for building the platform layer of the cloud for supporting PaaS services. The platform layer is a foundation for implementing the application layer for SaaS applications. The infrastructure layers is built with virtualized compute, storage, and network resources. Proper utilization of these resources provides the flexibility demanded by the users. 31 The platform layer environment is provided for the development, testing, deployment and monitoring the usage of apps. Indirectly, a virtualized cloud platform acts as a ‘system middleware’ between the infrastructure and application layers of a cloud. The application layer is formed with the collection of different modules of all software that are needed for the SaaS apps. The general service apps include those of information retrieval, doc processing, and authentication services. This layer also used in large-scale by the CRMs, financial transactions, and supply chain management. The application layer is also heavily used by enterprises in business marketing and sales, consumer relationship management (CRM), financial transactions, and supply chain management. It should be noted that not all cloud services are restricted to a single layer. Many applications may apply resources at mixed layers. After all, the three layers are built from the bottom up with a dependence relationship. In general, SaaS demands the most work from the provider, PaaS is in",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 29,
+          "rank": 1,
+          "score": 0.671715259552002,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0011"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 2,
+          "score": 0.6599146127700806,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 16,
+          "rank": 3,
+          "score": 0.6132632493972778,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0007"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 4,
+          "score": 0.5798392295837402,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 25,
+          "rank": 5,
+          "score": 0.5775653123855591,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0010"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.041237113402061855,
+      "answer_embedding_cosine": 0.5148470997810364,
+      "groundedness_token_overlap": 0.9966777408637874,
+      "timing": {
+        "retrieval_ms": 10.215700000117067,
+        "generation_ms": 0.3935999993700534,
+        "total_ms": 10.60929999948712
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-012",
+      "question": "What are the advantages of using a private cloud?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        22
+      ],
+      "answer": "Based on the provided context: of an enterprise. ❖ Advantages of using a private cloud are as follows: 1. Customer information protection: In the private cloud security concerns are less since customer data and other sensitive information do not flow out of private infrastructure. 2. Infrastructure ensuring SLAs: Private cloud provides specific operations such as appropriate clustering, data replication, system monitoring, and maintenance, disaster recovery, and other uptime services. 3. Compliance with standard procedures and operations: Specific procedures have to be put in place when deploying and executing applications according to third-party compliance standards. This is not possible in the case of the public cloud. ❖ Disadvantages of using a private cloud are: 1. The restricted area of operations: Private cloud is accessible within a particular area. So the area of accessibility is restricted. 2. Expertise requires: In the private cloud security concerns are less since customer data and other sensitive information do not flow out of private infrastructure. Hence skilled people are required to manage & operate cloud services. 22 3. Hybrid cloud: - A hybrid cloud is a heterogeneous distributed system formed by combining facilities of the public cloud and private cloud. For this reason, they are also called heterogeneous clouds. ❖ Advantages of using a Hybrid cloud are: - 1) Cost: Available at a cheap cost than other clouds because it is formed by a distributed system. 2) Speed: It is efficiently fast with lower cost, It reduces the latency of the data transfer process. 3) Security: Most important thing is security. A hybrid cloud is totally safe and secure because it works on the distributed system network. ❖ Disadvantages of using a Hybrid cloud are: - 1. It’s possible that businesses lack the internal knowledge necessary to create such a hybrid environment. Managing security may also be more challenging. Different access levels and security considerations may apply in each environment. 2. Managing a hybrid cloud may be more difficult. With all of the alternatives and choices available today, not to mention the new PaaS components and technologies that will be released every day going forward, public cloud and migration to public cloud are already complicated enough. 23 4. Community cloud: - Community clouds are distributed systems created by integrating the services of different clouds to address the specific needs of an industry, a community, or a business sector. But sharing responsibilities among the organizations is difficult. In the community cloud, the infrastructure is shared between organizations that have shared concerns or tasks. An organization or a third party may manage the cloud. ❖ Advantages of using Community cloud are: - 1. Because the entire cloud is shared by numerous enterprises or a community, community clouds are cost-effective. 2. Because it works with every user, the community cloud is adaptable and scalable. Users can alter the documents according to their needs and requirements. 3. Public cloud is less secure than the community cloud, which is more secure than private cloud. 4. Thanks to community clouds, we may share cloud resources, infrastructure, and other capabilities between different enterprises. ❖ Disadvantages of using Community cloud are: - 1. Not all businesses should choose community cloud. 2. gradual adoption of data 3. It’s challenging for corporations to share duties. 24 5. Multi-cloud: - Multi-cloud is the use of multiple cloud computing services from different providers, which allows organizations to use the best-suited services for their specific needs and avoid vendor lock-in. ❖ Advantages of using multi-cloud: - 1. Flexibility: Using multiple cloud providers allows organizations to choose the best-suited services for their specific needs, and avoid vendor lock-in. 2. Cost-effectiveness: Organizations can take advantage of the cost savings and pricing benefits offered by different cloud providers for different services. 3. Improved performance: By distributing workloads across multiple cloud providers, organizations can improve the performance and availability of their applications and services. 4. Increased security: Organizations can increase the security of their data and applications by spreading them across multiple cloud providers and implementing different security strategies for each. ❖ Disadvantages of using multi-cloud: - 1. Complexity: Managing multiple cloud providers and services can be complex and require specialized knowledge and expertise. 2. Increased costs: The cost of managing multiple cloud providers and services can be higher than using a single provider. 3. Compatibility issues: Different cloud providers may use different technologies and standards, which can cause compatibility issues and require additional resources to resolve. 4. Limited interoperability: Different cloud providers may not be able to interoperate seamlessly, which can limit the ability to move data and applications between them. 25 Cloud Service Models ❖ There are the following three types of cloud service",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 22,
+          "rank": 1,
+          "score": 0.7566840648651123,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0009"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 5,
+          "rank": 2,
+          "score": 0.6751304864883423,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0002"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 3,
+          "score": 0.6431121826171875,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 71,
+          "rank": 4,
+          "score": 0.6161125898361206,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0033"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 9,
+          "rank": 5,
+          "score": 0.5937567949295044,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0004"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": true,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.03811944091486658,
+      "answer_embedding_cosine": 0.5049382448196411,
+      "groundedness_token_overlap": 0.9963636363636363,
+      "timing": {
+        "retrieval_ms": 8.63289999688277,
+        "generation_ms": 0.2932999996119179,
+        "total_ms": 8.926199996494688
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-013",
+      "question": "What is a community cloud and why might it be used?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        24
+      ],
+      "answer": "Based on the provided context: processing reality. Using the cloud for communication, devices can coordinate activities. 13 Cloud Networking Cloud Networking is service or science in which company’s networking procedure is hosted on public or private cloud. ❖ Why cloud networking is required and in-demand? • It is in demand by many companies for their speedy and impervious delivery, fast processing, dependable transmission of information without any loss, pocket-friendly set-up. • The web access can be expanded and made greater reliable bandwidth to promote couple of network features into cloud. • Workloads are shared between cloud surroundings using software program as provider application. • Software-Defined Wide Area Network is technology that makes use of bunch of networking switches and routers to virtually get entry to machine from hardware to software program deployed on white box. • Software-defined Wide range community offers standard load balancing approach and combines all stages of network to user experience. ❖ Advantages of Cloud Networking: - 1. On-Demand Self Service – Cloud computing provides required application, services, and utility to client. With login key, they can begin to use besides any human interplay and cloud service providers. It consists of storage and digital machines. 2. High Scalability – It requests grant of resources on large scale besides any human intervention with every service provider. 3. Agility – It shares the assets efficiently amongst customers and works quickly. 4. Multi-sharing – By distributed computing, distinctive clients from couple of areas share identical resources through fundamental infrastructure. 5. Low Cost – It is very economical and can pay in accordance with its usage. 6. Services in pay per use Model – Application Programming Interface is given to clients to use resources and offerings and pay on service basis. 7. High availability and Reliability – The servers are accessible at the proper time besides any delay or disappointment. 8. Maintenance – It is user-friendly as they are convenient to get entry to from their location and does not require any installation set up. 14 Ubiquitous Computing Ubiquitous Computing is a term associated with the Internet of Things (IoT) and refers to the potential for connected devices and their benefits to become common place. The method of enhancing computing use by making many devices(services) available throughput the physical environment, but making them effectively invisible to the user. Also called ambient computing or pervasive computing, ubiquitous computing can be described as the saturation of work, living, and transportation spaces with devices that intercommunicate. These embedded systems would make these settings and transportation methods considerably more enjoyable and convenient since through contextual data aggregation and application, seamless, intuitive access points, and fluid payment systems. A prime example of a ubiquitous computing experience would be an autonomous vehicle that recognizes its authorized passenger through smartphone proximity, docks and charges itself when needed, and handles toll, emergency response, and fast-food payments itself by communicating with infrastructure. ❖ Tries to construct a universal computing environment (UCE) that conceals: - 1. Computing instructions. 2. Devices. 3. Resources. 4. Technology. Invisible to users. Computing everywhere. Many embedded, wearable, handheld devices communicate transparently to provide different services to the users. Devices mostly have low power and short-range wireless communication capabilities. Devices utilize multiple on-board sensors to gather information about surrounding environments. ❖ Characteristics: - 1. Context-awareness. 2. Volatile interaction. 3. Interaction among applications are based on specific context. ❖ Challenges and requirements: - 1. Hardware. 2. Applications. 3. User Interfaces. 4. Networking. 5. Mobility. 6. Scalability. 7. Reliability. 8. Interoperability. 9. Resource Discovery. 10. Privacy and Security. 15 ❖ Applications: - A combination of several factors, including the current location, the current user or if there are any other Ubicomp devices present in the near surroudings. ❖ Networking: - Another kye driver for the final transition will be the use of short-range wireless as well as traditional wired technologies. Wireless computing refers to the use of wireless technology to connect computers to a network. ❖ Mobility: - Mobility is made possible through wireless communication technologies. This behavior is an inherent property of the ubicomp concept and it should not be treated as a failure. ❖ Scalability: - In a ubiquitous computing environment where possibly thousands and thousands of devices are part of scalability of the whole system is a key requirement. All the devices are autonomous and must be able to operate independently a decentralized management will most likely be most suitable. 16 UNIT – 2 Cloud Reference Model The cloud computing reference model is an abstract model that characterizes and standardizes the functions of a cloud computing environment by partitioning it into abstraction layers and cross-layer functions. This reference model",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 13,
+          "rank": 1,
+          "score": 0.5989616513252258,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0006"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 2,
+          "score": 0.5669316053390503,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 3,
+          "score": 0.5600826740264893,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 5,
+          "rank": 4,
+          "score": 0.5148841738700867,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0002"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 22,
+          "rank": 5,
+          "score": 0.48515188694000244,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0009"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.04331210191082802,
+      "answer_embedding_cosine": 0.5702205896377563,
+      "groundedness_token_overlap": 0.9973753280839895,
+      "timing": {
+        "retrieval_ms": 10.688100002880674,
+        "generation_ms": 0.40859999717213213,
+        "total_ms": 11.096700000052806
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-014",
+      "question": "How do parallel computing and distributed computing differ according to the notes?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        34
+      ],
+      "answer": "Based on the provided context: Definition It is a type of computation in It is that type of computing in which the components are which various processes runs located on various networked systems that interact and simultaneously. coordinate their actions by passing messages to one another. Communication The processors communicate The computer systems connect with one another via a with one another via a bus. network. Functionality Several processors execute Several computers execute tasks simultaneously. various tasks simultaneously in parallel computing. Number of It occurs in a single computer It involves various computers. Computers system. Memory The system may have Each computer system in distributed computing has its distributed or shared memory. own memory. Usage It helps to improve the system It allows for scalability, resource sharing, and the performance efficient completion of computation tasks. 34 MapReduce Tutorial ❖ What is MapReduce? A MapReduce is a data processing tool which is used to process the data parallelly in a distributed form. The MapReduce is a paradigm which has two phases, the mapper phase, and the reducer phase. In the Mapper, the input is given in the form of a key-value pair. The output of the Mapper is fed to the reducer as input. The reducer runs only after the Mapper is over. The reducer too takes input in key-value format, and the output of reducer is the final output. ❖ Steps in Map Reduce: - • The map takes data in the form of pairs and returns a list of <key, value> pairs. The keys will not be unique in this case. • Using the output of Map, sort and shuffle are applied by the Hadoop architecture. This sort and shuffle acts on these list of <key, value> pairs and sends out unique keys and a list of values associated with this unique key <key, list(values)>. • An output of sort and shuffle sent to the reducer phase. The reducer performs a defined function on a list of values for unique keys, and Final output <key, value> will be stored/displayed. 35 ❖ Usage of MapReduce: - o It can be used in various application like document clustering, distributed sorting, and web link-graph reversal. o It can be used for distributed pattern-based searching. o We can also use MapReduce in machine learning. o It was used by Google to regenerate Google's index of the World Wide Web. o It can be used in multiple computing environments such as multi-cluster, multi-core, and mobile environment. 36 Hadoop – Architecture Hadoop works on MapReduce Programming Algorithm that was introduced by Google. ❖ The Hadoop Architecture Mainly consists of 4 components: - • MapReduce • HDFS (Hadoop Distributed File System) • YARN (Yet Another Resource Negotiator) • Common Utilities or Hadoop Common 1. MapReduce: - MapReduce nothing but just like an Algorithm or a data structure that is based on the YARN framework. The major feature of MapReduce is to perform the distributed processing in parallel in a Hadoop cluster which Makes Hadoop working so fast. When you are dealing with Big Data, serial processing is no more of any use. MapReduce has mainly 2 tasks which are divided phase-wise: In first phase, Map is utilized and in next phase Reduce is utilized. 37 ➢ Map Task: • RecordReader The purpose of recordreader is to break the records. It is responsible for providing key-value pairs in a Map() function. • Map: A map is nothing but a user-defined function whose work is to process the Tuples obtained from record reader. Combiner: Combiner is used for grouping the data in the Map workflow. • Partitionar: Partitional is responsible for fetching key-value pairs generated in the Mapper Phases. ➢ Reduce Task: • Shuffle and Sort: The process in which the Mapper generates the intermediate key-value and transfers them to the Reducer task is known as Shuffling. Using the Shuffling process the system can sort the data using its key value. • Reduce: The main function or task of the Reduce is to gather the Tuple generated from Map and then perform some sorting and aggregation sort of process on those key-value depending on its key element. • OutputFormat: Once all the operations are performed, the key-value pairs are written into the file with the help of record writer, each record in a new line, and the key and value in a space-separated manner. 2. HDFS: - HDFS (Hadoop Distributed File System) is utilized for storage permission. It is mainly designed for working on commodity Hardware devices(inexpensive devices), working on a distributed file system design. HDFS is designed in such a way that it believes more in storing the data in",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 34,
+          "rank": 1,
+          "score": 0.5689314603805542,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0013"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 5,
+          "rank": 2,
+          "score": 0.4807010889053345,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0002"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 3,
+          "score": 0.41542893648147583,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 60,
+          "rank": 4,
+          "score": 0.4059121608734131,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0026"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 29,
+          "rank": 5,
+          "score": 0.39079487323760986,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0011"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": true,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.048162230671736375,
+      "answer_embedding_cosine": 0.6001759767532349,
+      "groundedness_token_overlap": 0.9964285714285714,
+      "timing": {
+        "retrieval_ms": 11.926899998798035,
+        "generation_ms": 0.3817000033450313,
+        "total_ms": 12.308600002143066
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-015",
+      "question": "What are the four main components of Hadoop architecture?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        37
+      ],
+      "answer": "Based on the provided context: key-value pairs are written into the file with the help of record writer, each record in a new line, and the key and value in a space-separated manner. 2. HDFS: - HDFS (Hadoop Distributed File System) is utilized for storage permission. It is mainly designed for working on commodity Hardware devices(inexpensive devices), working on a distributed file system design. HDFS is designed in such a way that it believes more in storing the data in a large chunk of blocks rather than storing small data blocks. HDFS in Hadoop provides Fault-tolerance and High availability to the storage layer and the other devices present in that Hadoop cluster. Data storage Nodes in HDFS. • NameNode(Master) • DataNode(Slave) NameNode: NameNode works as a Master in a Hadoop cluster that guides the Datanode(Slaves). Namenode is mainly used for storing the Metadata i.e. the data about the data. Meta Data can be the transaction logs that keep track of the user’s activity in a Hadoop cluster. DataNode: DataNodes works as a Slave DataNodes are mainly utilized for storing the data in a Hadoop cluster, the number of DataNodes can be from 1 to 500 or even more than that. 3. YARN (Yet Another Resource Negotiator): - YARN is a Framework on which MapReduce works. YARN performs 2 operations that are Job scheduling and Resource Management. The Purpose of Job schedular is to divide a big task into small jobs so that each job can be assigned to various slaves in a Hadoop cluster and Processing can be Maximized. Job Scheduler also keeps track of which job is important, which job has more priority, dependencies between the jobs and all the other information like job timing, etc. And the use of Resource Manager is to manage all the resources that are made available for running a Hadoop cluster. Features of YARN • Multi-Tenancy • Scalability • Cluster-Utilization • Compatibility 38 4. Hadoop common or Common Utilities: - These utilities are used by HDFS, YARN, and MapReduce for running the cluster. Hadoop Common verify that Hardware failure in a Hadoop cluster is common so it needs to be solved automatically in software by Hadoop Framework. Programming Languages For Cloud Computing 1. JavaScript: - The best option for client-side JavaScript development is to develop rich, HTTP-based clients that require access to multiple cloud services, such as Azure Blob Storage and Amazon Cognito. Due to JavaScript's evolution in many cases, middleware layers with RESTful functionality are no longer necessary. 2. Node.js: - For speed and scalable cloud programming language, Node.js is the best. As this language is easy to manipulate and highly effective, it is used to develop an end-to-end application. Featuring non-blocking events and asynchronous communication patterns, it allows the application to handle many connections. Among many modern developers, Node.js is one of the favorites. 3. Python: - Python is a combination of various high-tech features that comprises speed, productivity, community, and open- source development. To increase the chances of landing lucrative gigs, you must learn it. As well it is also used in creating business applications, games, operating systems, etc. 4. C: - C programming language is known to be the fastest and most efficient. Choosing the C language is always best when priorities are based on optimization and efficiency. To support the cloud, developers use C and write the behind-scenes software. 5. GoLang: - When it comes to cloud development, GoLang is specifically chosen. It is a modern and robust language created and backed by Google, which supports concurrency, package management, and parallelism management. Although Golang is used in cloud platforms, it's maximum while working on Google Cloud (GCP). 6. Java: - Java is widely known as a general-purpose programming language. Java is also a highly versatile programming language, making it one of the languages widely used to create applications for desktops, websites, or mobile devices. 7. .NET: - ASP.NET or .NET is one of the best programming languages owned by Microsoft itself. It is mostly used to develop web applications and websites with multiple purposes. 8. PHP: - In this language, there is the availability of powerful output. To develop applications with great elements, PHP is the best choice. With various database management systems, PHP is also used in cloud computing. 9. Ruby on Rails: - With many benefits, Ruby on Rails is one of the programming languages used in cloud computing. 39 What is Google App Engine (GAE) A scalable runtime environment, Google App Engine is mostly used to run Web applications. App Engine makes it easier to develop scalable and high-performance Web apps. The App Engine SDK facilitates the testing",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 38,
+          "rank": 1,
+          "score": 0.5046303868293762,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0014"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 34,
+          "rank": 2,
+          "score": 0.4953198730945587,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0013"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 29,
+          "rank": 3,
+          "score": 0.4740416407585144,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0011"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 94,
+          "rank": 4,
+          "score": 0.437669962644577,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0044"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 5,
+          "score": 0.3928608298301697,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": false,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.027707808564231738,
+      "answer_embedding_cosine": 0.5294507741928101,
+      "groundedness_token_overlap": 0.9969325153374233,
+      "timing": {
+        "retrieval_ms": 10.533100001339335,
+        "generation_ms": 0.40330000047106296,
+        "total_ms": 10.936400001810398
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-016",
+      "question": "What is KVM in the context of virtualization?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        54
+      ],
+      "answer": "Based on the provided context: for scalability and clustering. As resource demand increases, you can deploy the desired amount of VMs to meet all the workload needs and fine-tune them for specific tasks. Additionally, you can use KVM to set up server clusters or private clouds, such as OpenStack. 2. Virtio Devices and Hardware: - Virtio is a virtualization standard primarily for storage and network devices used as the primary input/output (IO) virtualization platform in KVM. It enables high performance of disks and network devices on virtual guest machines. By default, it supports a wide variety of hardware devices. This support also applies to new advancements in hardware technologies. As they get adopted into the Linux kernel mainline, they will also work with KVM. 3. Migration: - KVM supports offline and live migrations. For example, when the host server is offline for maintenance, use KVM to migrate VMs to another host. Live migrations require no downtime if the host and target servers use CPUs from the same manufacturer. Alternatively, you will first need to shut down an instance to move VMs from one host to another using different CPU manufacturers. In this case, some features may or may not work, depending on the CPU. 4. Security: - KVM uses SELinux and sVirt to isolate virtual instances and protect the guest systems from various attacks. It also benefits from regular security updates to the kernel. Patches and updates are quickly released if anything goes wrong. Furthermore, the source code is transparent and regularly tested for suitability due to the collaborative approach to work done on the kernel. 5. Wrapping Up: - This article briefly explained the Linux Kernel-Based Virtual Machine. If your needs require using KVM, Liquid Web has many available hosting solutions that support it, including dedicated servers and server clusters, which are great for scaling your business. Contact our sales team to learn more about our offerings. 54 Xen Xen is an open source hypervisor based on paravirtualization. It is the most popular application of paravirtualization. Xen has been extended to compatible with full virtualization using hardware-assisted virtualization. It enables high performance to execute guest operating system. This is probably done by removing the performance loss while executing the instructions requiring significant handling and by modifying portion of the guest operating system executed by Xen, with reference to the execution of such instructions. Hence this especially support x86, which is the most used architecture on commodity machines and servers. Above figure describes the Xen Architecture and its mapping onto a classic x86 privilege model. A Xen based system is handled by Xen hypervisor, which is executed in the most privileged mode and maintains the access of guest operating system to the basic hardware. Guest operating system are run between domains, which represents virtual machine instances. In addition, particular control software, which has privileged access to the host and handles all other guest OS, runs in a special domain called Domain 0. This the only one loaded once the virtual machine manager has fully booted, and hosts an HTTP server that delivers requests for virtual machine creation, configuration, and termination. This component establishes the primary version of a shared virtual machine manager (VMM), which is a necessary part of Cloud computing system delivering Infrastructure-as-a-Service (IaaS) solution. Various x86 implementation support four distinct security levels, termed as rings, i.e., Ring 0, Ring 1, Ring 2, Ring 3 Here, Ring 0 represents the level having most privilege and Ring 3 represents the level having least privilege. Almost all the frequently used Operating system, except for OS/2, uses only two levels i.e. Ring 0 for the Kernel code and Ring 3 for user application and non-privilege OS program. This provides a chance to the Xen to implement paravirtualization. This enables Xen to control unchanged the Application Binary Interface (ABI) thus allowing a simple shift to Xen-virtualized solutions, from an application perspective. Due to the structure of x86 instruction set, some instructions allow code execution in Ring 3 to switch to Ring 0 (Kernel mode). Such an operation is done at hardware level, and hence between a virtualized environment, it will lead to a TRAP or a silent fault, thus preventing the general operation of the guest OS as it is now running in Ring 1. 55 This condition is basically occurred by a subset of system calls. To eliminate this situation, implementation in operating system requires a modification and all the sensitive system calls needs re-implementation with hyper- calls. Here, hyper-calls are the particular calls revealed by the virtual machine (VM) interface of Xen and by use of it, Xen hypervisor tends to catch the execution",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 54,
+          "rank": 1,
+          "score": 0.6507371068000793,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0022"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 47,
+          "rank": 2,
+          "score": 0.5845196843147278,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0019"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 52,
+          "rank": 3,
+          "score": 0.5725235939025879,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0021"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 60,
+          "rank": 4,
+          "score": 0.558164119720459,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0026"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 59,
+          "rank": 5,
+          "score": 0.5550494194030762,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0025"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": true,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.05623471882640587,
+      "answer_embedding_cosine": 0.657127857208252,
+      "groundedness_token_overlap": 0.9942857142857143,
+      "timing": {
+        "retrieval_ms": 10.34609999624081,
+        "generation_ms": 0.4132000030949712,
+        "total_ms": 10.75929999933578
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-017",
+      "question": "What is a cloud platform?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        97
+      ],
+      "answer": "Based on the provided context: servers, databases, storage, analytics, networking, applications, and intelligence, are rented by businesses. As a result, businesses do not need to invest in data centres or computing facilities. They actually pay for the services they offer. ❖ Types of Cloud Platforms: - Cloud systems come in a range of shapes and sizes. None of them are suitable for all. To meet the varying needs of consumers, a range of models, forms, and services are available. They are as follows: 1. Public Cloud: Third-party providers that distribute computing services over the Internet are known as public cloud platforms. A few good examples of trending and mostly used cloud platform are Google Cloud Platform, AWS (Amazon Web Services), Microsoft Azure, Alibaba and IBM Bluemix. 2. Private Cloud: A private cloud is normally hosted by a third-party service provider or in an on-site data centre. A private cloud platform is always dedicated to a single company and it is the key difference between the public and private cloud. Or we can say that a private cloud is a series of cloud computing services used primarily by one corporation or organization. 3. Hybrid Cloud: The type of cloud architecture that combines both the public and private cloud systems is termed to as a Hybrid cloud platform. Data and programs are easily migrated from one to the other. This allows the company to be more flexible while still improving infrastructure, security, and enforcement. Organizations can use a cloud platform to develop cloud-native software, test and build them, and store, back up, and recover data. The major role of it is that will not only help the company to grow but also it helps to perform the data analysis with the help of different algorithms and the results can be a true deal breaker. Streaming video and audio, embedding information into activities, and providing applications on-demand on a global scale are all possibilities. Simply stated, cloud computing is the distribution of computing services over the Internet (\"the cloud\") in order to provide quicker innovation, more versatile resources, and economies of scale. We usually only pay for the cloud services that we use, which helps us to cut costs, operate our infrastructure more effectively, and scale as our company grows. 97 Protein Structure Prediction Cloud computing is an emerging technology that provides various computing services on demand. It provides convenient access to a shared pool of higher-level services and other system resources. Nowadays, cloud computing has a great significance in the fields of geology, biology, and other scientific research areas. Protein structure prediction is the best example in research area that makes use of cloud applications for its computation and storage. A protein is composed of long chains of amino acids joined together by peptide bonds. The various structures of protein help in the designing of new drugs and the various sequences of proteins from its three-dimensional structure in predictive form is known as a Protein structure prediction. Firstly primary structures of proteins are formed and then prediction of the secondary, tertiary and quaternary structures are done from the primary one. In this way predictions of protein structures are done. Protein structure prediction also makes use of various other technologies like artificial neural networks, artificial intelligence, machine learning and probabilistic techniques, also holds great importance in fields like theoretical chemistry and bioinformatics. There are various algorithms and tools that exists for protein structure prediction. CASP (Critical Assessment of Protein Structure Prediction) is a well-known tool that provides methods for automated web servers and the results of research work are placed on clouds like CAMEO (Continuous Automated Model Evaluation) server. These servers can be accessed by anyone as per their requirements from any place. Some of the tools or servers used in protein structure prediction are Phobius, FoldX, LOMETS, Prime, Predict protein, SignalP, BBSP, EVfold, Biskit, HHpred, Phre, ESyired3D. Using these tools new structures are predicted and the results are placed on the cloud-based servers. 98 Cloud Computing and Data Analytics Cloud Computing: Cloud Computing is a technique in which a network of remote servers is hosted on the Internet. These servers primarily store the data, manage the data, and process the data. But this is not done by a local server or a personal computer. In short, data here is gathered on the internet. Thus, eliminating the use of a physical server. Cloud Computing doesn’t depend on data analytics for anything. Data Analytics: Data analysis is defined as a process where data is inspected, cleaned, transformed, and modeled. The primary aim of data analytics is to discover information that is useful. So that a conclusion is",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 1,
+          "score": 0.7392289638519287,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 2,
+          "score": 0.674121618270874,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 13,
+          "rank": 3,
+          "score": 0.6084252595901489,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0006"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 19,
+          "rank": 4,
+          "score": 0.5810362100601196,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0008"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 7,
+          "rank": 5,
+          "score": 0.5760889053344727,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0003"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": true,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.059113300492610835,
+      "answer_embedding_cosine": 0.7011867165565491,
+      "groundedness_token_overlap": 0.9970414201183432,
+      "timing": {
+        "retrieval_ms": 10.001499998907093,
+        "generation_ms": 0.40779999835649505,
+        "total_ms": 10.409299997263588
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-018",
+      "question": "How do cloud computing and data analytics differ?",
+      "supported": true,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [
+        99
+      ],
+      "answer": "Based on the provided context: data. But this is not done by a local server or a personal computer. In short, data here is gathered on the internet. Thus, eliminating the use of a physical server. Cloud Computing doesn’t depend on data analytics for anything. Data Analytics: Data analysis is defined as a process where data is inspected, cleaned, transformed, and modeled. The primary aim of data analytics is to discover information that is useful. So that a conclusion is made which further helps in the decision-making process of a company. In data analytics, the data is measured and estimated from big data sources. Data storage is done on cloud and data analytics involves the extraction of data. Thus, data analytics depends on cloud computing for data extraction. ❖ Differences between Cloud Computing and Data Analytics: S.No. Cloud Computing Data Analytics Data storage and retrieval from whichever A process where data is inspected, cleaned, transformed 1 place at whatever time. and modelled 2 Is independent of data analytics Is dependent on cloud computing. Has solutions to data intensive computing and 3 Works on the improvement of a particular organization doesn’t focus on a particular organization. Involves SaaS (Software as a Service), PaaS 4 (Platform as a Service), IaaS (Infrastructure Involves python, Sas, Apache Spark, etc. as a Service) Is further categorized as public cloud, private Big Data Technology is Hadoop, MapReduce, and HDFS 5 cloud, community cloud and hybrid cloud. are important aspects Cloud Computing providers are Google, Data Analytics providers are Cloudera, Hortonworks, 6 Amazon Web Service, Microsoft, Dell, Apache and MapR. Apple, IBM. 7 Less Costly Costlier Roles related to cloud computing are cloud Roles related to data analytics are data developer, data 8 resource administrator, cloud service administrator, data analyst, data scientist, etc. provider, cloud consumer, cloud auditor, etc 99 Satellite Image Processing Satellite Image Processing is an important field in research and development and consists of the images of earth and satellites taken by the means of artificial satellites. Firstly, the photographs are taken in digital form and later are processed by the computers to extract the information. Statistical methods are applied to the digital images and after processing the various discrete surfaces are identified by analysing the pixel values. The satellite imagery is widely used to plan the infrastructures or to monitor the environmental conditions or to detect the responses of upcoming disasters. In broader terms we can say that the Satellite Image Processing is a kind of remote sensing which works on pixel resolutions to collect coherent information about the earth surface. Majorly there are four kinds of resolutions associated with satellite imagery. These are: • Spatial resolution – It is determined by the sensors Instantaneous Field of View(IFoV) and is defined as the pixel size of an image that is visible to the human eye being measured on the ground. Since it has high resolving power or the ability to separate and hence is termed as Spatial Resolution. • Spectral resolution – This resolution measures the wavelength internal size and determines the number of wavelength intervals that the sensor measures. • Temporal resolution – The word temporal is associated with time or days and is defined as the time that passes between various imagery cloud periods. • Radiometric resolution – This resolution provides the actual characteristics of the image and is generally expressed in bits size. It gives the effective bit depth and records the various levels of brightness of imaging system. Thus, Satellite Image Processing has huge amount of applications in research and development fields, in remote sensing, in astronomy and now even in cloud computing on a large scale. 100 CRM CRM stands for Customer relationship management and refers to all the tools, techniques, strategies, and technologies which are used by an organization to build, retain, acquiring customer relationships and customer data. Customer relationship management makes sure the smooth functioning of storage of customer data like demographics, purchase behaviour, pattern, history, etc, and every interaction with a customer to build strong relations and increase the sales and profits of an organization. ❖ CRM In Cloud Computing: - CRM in cloud computing is referred to as software that is in cloud-based form for easily accessible to customers over the internet. Nowadays many organization uses CRM cloud so that the customer can easily access information via the internet. Moreover, the computing system has become so strong that customers can easily access it via their phones. As a result, easy access to information made quick sales or conversions. CRM cloud provides the facilities for information sharing, backup, and storing, and access from any part of the world.",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 99,
+          "rank": 1,
+          "score": 0.8044783473014832,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0046"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 2,
+          "rank": 2,
+          "score": 0.6078712344169617,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0001"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 29,
+          "rank": 3,
+          "score": 0.563857913017273,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0011"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 97,
+          "rank": 4,
+          "score": 0.5488641262054443,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0045"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 5,
+          "rank": 5,
+          "score": 0.5457321405410767,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0002"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": true,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": 0.04528301886792453,
+      "answer_embedding_cosine": 0.8431791067123413,
+      "groundedness_token_overlap": 0.9969879518072289,
+      "timing": {
+        "retrieval_ms": 10.711200004152488,
+        "generation_ms": 0.3912999964086339,
+        "total_ms": 11.102500000561122
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    },
+    {
+      "id": "cloud-019",
+      "question": "What is the capital of France?",
+      "supported": false,
+      "expected_source": "Cloud Computing Notes.pdf",
+      "expected_pages": [],
+      "answer": "Based on the provided context: the stack, is where the actual cloud apps are located. Cloud applications, as opposed to traditional applications, can take advantage of the automatic- scaling functionality to gain greater performance, availability, and lower operational costs. 2. This layer consists of different Cloud Services which are used by cloud users. Users can access these applications according to their needs. Applications are divided into Execution layers and Application layers. 3. In order for an application to transfer data, the application layer determines whether communication partners are available. Whether enough cloud resources are accessible for the required communication is decided at the application layer. Applications must cooperate in order to communicate, and an application layer is in charge of this. 4. The application layer, in particular, is responsible for processing IP traffic handling protocols like Telnet and FTP. Other examples of application layer systems include web browsers, SNMP protocols, HTTP protocols, or HTTPS, which is HTTP’s successor protocol. 19 1. Platform Layer: - 1. The operating system and application software make up this layer. 2. Users should be able to rely on the platform to provide them with Scalability, Dependability, and Security Protection which gives users a space to create their apps, test operational processes, and keep track of execution outcomes and performance. SaaS application implementation’s application layer foundation. 3. The objective of this layer is to deploy applications directly on virtual machines. 4. Operating systems and application frameworks make up the platform layer, which is built on top of the infrastructure layer. The platform layer’s goal is to lessen the difficulty of deploying programmers directly into VM containers. 5. By way of illustration, Google App Engine functions at the platform layer to provide API support for implementing storage, databases, and business logic of ordinary web apps. 2. Infrastructure Layer: - 1. It is a layer of virtualization where physical resources are divided into a collection of virtual resources using virtualization technologies like Xen, KVM, and VMware. 2. This layer serves as the Central Hub of the Cloud Environment, where resources are constantly added utilizing a variety of virtualization techniques. 3. A base upon which to create the platform layer. constructed using the virtualized network, storage, and computing resources. Give users the flexibility they want. 4. Automated resource provisioning is made possible by virtualization, which also improves infrastructure management. 5. The infrastructure layer sometimes referred to as the virtualization layer, partitions the physical resources using virtualization technologies like Xen, KVM, Hyper-V, and VMware to create a pool of compute and storage resources. 6. The infrastructure layer is crucial to cloud computing since virtualization technologies are the only ones that can provide many vital capabilities, like dynamic resource assignment. 3. Data center Layer: - 1. In a cloud environment, this layer is responsible for Managing Physical Resources such as servers, switches, routers, power supplies, and cooling systems. 2. Providing end users with services requires all resources to be available and managed in data centers. 3. Physical servers connect through high-speed devices such as routers and switches to the data center. 4. In software application designs, the division of business logic from the persistent data it manipulates is well- established. 5. A single database used by many microservices creates a very close coupling. 20 Types of Cloud 1. Public Cloud: - Public clouds are managed by third parties which provide cloud services over the internet to the public, these services are available as pay-as-you-go billing models. The fundamental characteristics of public clouds are multitenancy. A public cloud is meant to serve multiple users, not a single customer. ❖ Advantages of using a Public cloud are: - 1. High Scalability 2. Cost Reduction 3. Reliability and flexibility 4. Disaster Recovery ❖ Disadvantages of using a Public cloud are: - 1. Loss of control over data 2. Data security and privacy 3. Limited Visibility 4. Unpredictable cost 21 2. Private cloud: - Private clouds are distributed systems that work on private infrastructure and provide the users with dynamic provisioning of computing resources. Instead of a pay-as-you-go model in private clouds, there could be other schemes that manage the usage of the cloud and proportionally billing of the different departments or sections of an enterprise. ❖ Advantages of using a private cloud are as follows: 1. Customer information protection: In the private cloud security concerns are less since customer data and other sensitive information do not flow out of private infrastructure. 2. Infrastructure ensuring SLAs: Private cloud provides specific operations such as appropriate clustering, data replication, system monitoring, and maintenance, disaster recovery, and other uptime services. 3. Compliance with standard procedures and operations: Specific procedures have to",
+      "retrieved": [
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 19,
+          "rank": 1,
+          "score": 0.08320765197277069,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0008"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 60,
+          "rank": 2,
+          "score": 0.07763509452342987,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0026"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 92,
+          "rank": 3,
+          "score": 0.07296615839004517,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0043"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 34,
+          "rank": 4,
+          "score": 0.069060318171978,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0013"
+        },
+        {
+          "document_id": "doc-3b1490345df626f5",
+          "filename": "Cloud Computing Notes.pdf",
+          "page_number": 91,
+          "rank": 5,
+          "score": 0.0634455531835556,
+          "chunk_id": "doc-3b1490345df626f5-chunk-0042"
+        }
+      ],
+      "retrieval_hit": true,
+      "page_hit": null,
+      "refusal_detected": false,
+      "answer_correct": false,
+      "answer_token_f1": null,
+      "answer_embedding_cosine": null,
+      "groundedness_token_overlap": 0.9937694704049844,
+      "timing": {
+        "retrieval_ms": 10.080200001539197,
+        "generation_ms": 0.38689999928465113,
+        "total_ms": 10.467100000823848
+      },
+      "provider": "mock",
+      "model": "mock-model"
+    }
+  ],
+  "evaluation_mode": "mock_provider_retrieval_optimization",
+  "index_stats": {
+    "document_count": 2,
+    "chunk_count": 49,
+    "unique_content_hashes": 2,
+    "page_count": 49
+  }
+}

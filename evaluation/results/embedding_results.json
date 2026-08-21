@@ -1,0 +1,22 @@
+{
+  "experiment": "embedding_model",
+  "status": "blocked",
+  "configuration": {
+    "chunk_size": 512,
+    "chunk_overlap": 50,
+    "top_k": 5,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "llm_provider": "mock",
+    "llm_model": "mock-model",
+    "similarity_threshold": -1.0
+  },
+  "current_model": {
+    "name": "sentence-transformers/all-MiniLM-L6-v2",
+    "dimension": 384,
+    "evaluated_in": "baseline.json"
+  },
+  "alternatives_considered": [
+    "sentence-transformers/paraphrase-MiniLM-L3-v2"
+  ],
+  "blocked_reason": "The alternative model is not present in the local Hugging Face cache and network access is unavailable. No comparison is reported rather than fabricating a result."
+}
