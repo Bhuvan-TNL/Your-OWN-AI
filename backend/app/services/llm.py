@@ -7,6 +7,11 @@ from typing import Any, Protocol
 
 import httpx
 
+try:  # The SDK is optional for mock/Hugging Face-only test environments.
+    from groq import Groq
+except ImportError:  # pragma: no cover - exercised when the optional dependency is absent
+    Groq = None  # type: ignore[assignment,misc]
+
 from app.core.config import settings
 
 logger = logging.getLogger("your_own_ai.llm")
@@ -39,7 +44,13 @@ class LLMGenerationResult:
 
 
 class BaseLLMProvider(Protocol):
-    def generate(self, prompt: str, *, max_tokens: int | None = None) -> str:
+    def generate(
+        self,
+        prompt: str,
+        *,
+        max_tokens: int | None = None,
+        system_prompt: str | None = None,
+    ) -> str:
         ...
 
 
@@ -49,7 +60,13 @@ class MockLLMProvider:
     def __init__(self, model: str = "mock-model") -> None:
         self.model = model
 
-    def generate(self, prompt: str, *, max_tokens: int | None = None) -> str:
+    def generate(
+        self,
+        prompt: str,
+        *,
+        max_tokens: int | None = None,
+        system_prompt: str | None = None,
+    ) -> str:
         cleaned = prompt.strip()
         if not cleaned:
             raise LLMConfigurationError("Prompt cannot be empty.")
@@ -88,7 +105,13 @@ class HuggingFaceLLMProvider:
         self.max_tokens = max_tokens
         self.temperature = temperature
 
-    def generate(self, prompt: str, *, max_tokens: int | None = None) -> str:
+    def generate(
+        self,
+        prompt: str,
+        *,
+        max_tokens: int | None = None,
+        system_prompt: str | None = None,
+    ) -> str:
         if not prompt or not prompt.strip():
             raise LLMConfigurationError("Prompt cannot be empty.")
         if not self.model or self.model.strip() in {"", "your_model_here"}:
@@ -143,6 +166,96 @@ class HuggingFaceLLMProvider:
         return str(generated_text).strip()
 
 
+def _redact_secret(message: str, secret: str) -> str:
+    if secret:
+        return message.replace(secret, "[REDACTED]")
+    return message
+
+
+class GroqLLMProvider:
+    """Official Groq SDK provider behind the common LLM provider interface."""
+
+    def __init__(
+        self,
+        model: str,
+        api_key: str | None = None,
+        *,
+        max_tokens: int = 256,
+        temperature: float = 0.2,
+        timeout: float = 90.0,
+    ) -> None:
+        if not model or not model.strip() or model.strip() in {"your_model_here", "your-model-here"}:
+            raise LLMConfigurationError(
+                "LLM_MODEL is not configured. Set it in backend/.env or environment variables."
+            )
+
+        self.model = model.strip()
+        self._api_key = api_key.strip()
+        self.max_tokens = max_tokens
+        self.temperature = temperature
+        self._client = None
+        if Groq is None or not self._api_key:
+            return
+        try:
+            self._client = Groq(api_key=self._api_key, timeout=timeout)
+        except Exception as exc:  # pragma: no cover - SDK construction is mocked in tests
+            raise LLMProviderError(
+                f"Groq client initialization failed: {_redact_secret(str(exc), self._api_key)}"
+            ) from exc
+
+    def generate(
+        self,
+        prompt: str,
+        *,
+        max_tokens: int | None = None,
+        system_prompt: str | None = None,
+    ) -> str:
+        if not prompt or not prompt.strip():
+            raise LLMConfigurationError("Prompt cannot be empty.")
+        if Groq is None:
+            raise LLMConfigurationError(
+                "The Groq SDK is not installed. Install the backend requirements before using LLM_PROVIDER=groq."
+            )
+        if not self._api_key:
+            raise LLMConfigurationError(
+                "GROQ_API_KEY is not configured. Set it only in backend/.env or the process environment."
+            )
+        if self._client is None:
+            raise LLMProviderError("Groq client is unavailable.")
+
+        messages: list[dict[str, str]] = []
+        if system_prompt and system_prompt.strip():
+            messages.append({"role": "system", "content": system_prompt.strip()})
+        messages.append({"role": "user", "content": prompt.strip()})
+
+        try:
+            completion = self._client.chat.completions.create(
+               model=self.model,
+               messages=messages,
+               max_completion_tokens=max_tokens if max_tokens is not None else self.max_tokens,
+               temperature=self.temperature,
+               include_reasoning=False,
+     )
+        except Exception as exc:
+            detail = _redact_secret(str(exc), self._api_key)
+            raise LLMProviderError(f"Groq request failed: {detail or 'provider error'}") from exc
+
+        choices = getattr(completion, "choices", None)
+        if not choices:
+            raise LLMProviderError("Groq returned an empty response.")
+        message = getattr(choices[0], "message", None)
+        content = getattr(message, "content", None) if message is not None else None
+        if isinstance(content, list):
+            content = "".join(
+                str(part.get("text", "")) if isinstance(part, dict) else str(part)
+                for part in content
+            )
+        answer = str(content or "").strip()
+        if not answer:
+            raise LLMProviderError("Groq returned an empty response.")
+        return answer
+
+
 class LLMService:
     """Service for generating answers from a question and retrieved context."""
 
@@ -151,6 +264,7 @@ class LLMService:
         provider: str | None = None,
         model: str | None = None,
         token: str | None = None,
+        groq_api_key: str | None = None,
         system_prompt: str | None = None,
         max_tokens: int | None = None,
         temperature: float | None = None,
@@ -160,6 +274,7 @@ class LLMService:
         raw_model = model if model is not None else settings.llm_model
         self.model = raw_model.strip() if isinstance(raw_model, str) else (raw_model or "google/flan-t5-base")
         self.token = token if token is not None else settings.hf_token
+        self.groq_api_key = groq_api_key if groq_api_key is not None else settings.groq_api_key
         self.system_prompt = (system_prompt if system_prompt is not None else settings.llm_system_prompt).strip()
         self.max_tokens = int(max_tokens if max_tokens is not None else settings.llm_max_tokens)
         self.temperature = float(temperature if temperature is not None else settings.llm_temperature)
@@ -177,6 +292,13 @@ class LLMService:
             self._provider = HuggingFaceLLMProvider(
                 model=self.model,
                 token=self.token,
+                max_tokens=self.max_tokens,
+                temperature=self.temperature,
+            )
+        elif self.provider == "groq":
+            self._provider = GroqLLMProvider(
+                model=self.model,
+                api_key=self.groq_api_key,
                 max_tokens=self.max_tokens,
                 temperature=self.temperature,
             )
@@ -211,9 +333,13 @@ class LLMService:
 
         try:
             if max_tokens is None:
-                answer = self._provider.generate(prompt)
+                answer = self._provider.generate(prompt, system_prompt=self.system_prompt)
             else:
-                answer = self._provider.generate(prompt, max_tokens=max_tokens)
+                answer = self._provider.generate(
+                    prompt,
+                    max_tokens=max_tokens,
+                    system_prompt=self.system_prompt,
+                )
         except LLMConfigurationError:
             raise
         except LLMProviderError as exc:
@@ -230,7 +356,12 @@ class LLMService:
         )
 
 
-llm_service = LLMService(provider=settings.llm_provider, model=settings.llm_model, token=settings.hf_token)
+llm_service = LLMService(
+    provider=settings.llm_provider,
+    model=settings.llm_model,
+    token=settings.hf_token,
+    groq_api_key=settings.groq_api_key,
+)
 
 
 def build_prompt(question: str, context: str) -> str:
@@ -242,5 +373,6 @@ def generate_answer(question: str, context: str, *, provider: str | None = None,
         provider=provider if provider is not None else settings.llm_provider,
         model=model if model is not None else settings.llm_model,
         token=settings.hf_token,
+        groq_api_key=settings.groq_api_key,
     )
     return service.generate_answer(question, context)

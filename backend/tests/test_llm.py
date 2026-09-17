@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from types import SimpleNamespace
+
+import app.services.llm as llm_module
 import pytest
 import httpx
 
@@ -137,6 +140,99 @@ def test_hf_provider_empty_response_is_rejected(monkeypatch) -> None:
 
     monkeypatch.setattr("app.services.llm.httpx.Client.post", lambda *args, **kwargs: DummyResponse())
     service = LLMService(provider="huggingface", model="google/flan-t5-base")
+
+    with pytest.raises(LLMProviderError, match="empty response"):
+        service.generate_answer("What is normalization?", "Normalization reduces redundancy.")
+
+
+def test_groq_provider_requires_api_key() -> None:
+    service = LLMService(provider="groq", model="test-model", groq_api_key="")
+
+    with pytest.raises(LLMConfigurationError, match="GROQ_API_KEY"):
+        service.generate_answer("What is normalization?", "Normalization reduces redundancy.")
+
+
+def test_groq_provider_generates_with_grounded_chat_messages(monkeypatch) -> None:
+    captured: dict[str, object] = {}
+
+    class FakeCompletions:
+        def create(self, **kwargs):
+            captured.update(kwargs)
+            return SimpleNamespace(
+                choices=[SimpleNamespace(message=SimpleNamespace(content="Grounded Groq answer."))]
+            )
+
+    class FakeGroq:
+        def __init__(self, **kwargs):
+            captured["client"] = kwargs
+            self.chat = SimpleNamespace(completions=FakeCompletions())
+
+    monkeypatch.setattr(llm_module, "Groq", FakeGroq)
+    service = LLMService(
+        provider="groq",
+        model="test-model",
+        groq_api_key="placeholder",
+        system_prompt="Use only the supplied context.",
+        max_tokens=64,
+        temperature=0.1,
+    )
+
+    result = service.generate_answer("What is normalization?", "Normalization reduces redundancy.")
+
+    assert result.answer == "Grounded Groq answer."
+    assert result.provider == "groq"
+    assert result.model == "test-model"
+    assert captured["client"] == {"api_key": "placeholder", "timeout": 90.0}
+    assert captured["model"] == "test-model"
+    assert captured["max_tokens"] == 64
+    assert captured["temperature"] == 0.1
+    assert [message["role"] for message in captured["messages"]] == ["system", "user"]
+    assert "Normalization reduces redundancy." in captured["messages"][1]["content"]
+
+
+def test_groq_provider_failure_is_mapped(monkeypatch) -> None:
+    class FakeCompletions:
+        def create(self, **kwargs):
+            raise RuntimeError("rate limit")
+
+    class FakeGroq:
+        def __init__(self, **kwargs):
+            self.chat = SimpleNamespace(completions=FakeCompletions())
+
+    monkeypatch.setattr(llm_module, "Groq", FakeGroq)
+    service = LLMService(provider="groq", model="test-model", groq_api_key="placeholder")
+
+    with pytest.raises(LLMProviderError, match="Groq request failed"):
+        service.generate_answer("What is normalization?", "Normalization reduces redundancy.")
+
+
+def test_groq_provider_timeout_is_mapped(monkeypatch) -> None:
+    class FakeCompletions:
+        def create(self, **kwargs):
+            raise TimeoutError("timed out")
+
+    class FakeGroq:
+        def __init__(self, **kwargs):
+            self.chat = SimpleNamespace(completions=FakeCompletions())
+
+    monkeypatch.setattr(llm_module, "Groq", FakeGroq)
+    service = LLMService(provider="groq", model="test-model", groq_api_key="placeholder")
+
+    with pytest.raises(LLMProviderError, match="Groq request failed"):
+        service.generate_answer("What is normalization?", "Normalization reduces redundancy.")
+
+
+def test_groq_provider_empty_response_is_rejected(monkeypatch) -> None:
+    class FakeCompletions:
+        def create(self, **kwargs):
+            return SimpleNamespace(choices=[])
+
+    class FakeGroq:
+        def __init__(self, **kwargs):
+            self.chat = SimpleNamespace(completions=FakeCompletions())
+
+    monkeypatch.setattr(llm_module, "Groq", FakeGroq)
+    service = LLMService(provider="groq", model="test-model", groq_api_key="placeholder")
 
     with pytest.raises(LLMProviderError, match="empty response"):
         service.generate_answer("What is normalization?", "Normalization reduces redundancy.")

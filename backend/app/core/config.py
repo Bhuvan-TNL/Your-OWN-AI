@@ -14,7 +14,7 @@ def _load_dotenv(path: Path) -> None:
     if not path.exists():
         return
 
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
+    for raw_line in path.read_text(encoding="utf-8-sig").splitlines():
         line = raw_line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
@@ -95,6 +95,7 @@ class Settings:
     top_k: int
     similarity_threshold: float
     hf_token: str = ""
+    groq_api_key: str = ""
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -136,6 +137,7 @@ class Settings:
             field_name="SIMILARITY_THRESHOLD",
         )
         hf_token = (os.getenv("HF_TOKEN", "") or "").strip()
+        groq_api_key = (os.getenv("GROQ_API_KEY", "") or "").strip()
 
         return cls(
             llm_provider=llm_provider,
@@ -150,6 +152,7 @@ class Settings:
             top_k=top_k,
             similarity_threshold=similarity_threshold,
             hf_token=hf_token,
+            groq_api_key=groq_api_key,
         )
 
 

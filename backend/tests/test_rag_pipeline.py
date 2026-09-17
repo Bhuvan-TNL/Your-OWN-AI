@@ -11,6 +11,7 @@ from app.services.chunker import DocumentChunk
 from app.services.embeddings import embed_texts
 from app.services.llm import LLMService
 from app.services.llm import LLMProviderError
+import app.services.llm as llm_module
 from app.services.rag_pipeline import RAGPipeline
 from app.services.retriever import QueryRetriever, RetrievalResult
 from app.services.vector_store import VectorStore
@@ -183,6 +184,46 @@ def test_pipeline_passes_context_to_mock_llm_and_preserves_sources() -> None:
     assert response.sources[0].page_number == 4
     assert response.sources[0].score == 0.88
     assert response.timing.generation_ms >= 0
+
+
+def test_pipeline_uses_mocked_groq_provider(monkeypatch) -> None:
+    class FakeCompletions:
+        def create(self, **kwargs):
+            assert kwargs["messages"][0]["role"] == "system"
+            assert "Service-oriented architecture" in kwargs["messages"][1]["content"]
+            return SimpleNamespace(
+                choices=[SimpleNamespace(message=SimpleNamespace(content="Grounded Groq answer."))]
+            )
+
+    class FakeGroq:
+        def __init__(self, **kwargs):
+            self.chat = SimpleNamespace(completions=FakeCompletions())
+
+    class StaticRetriever:
+        def retrieve(self, question: str, top_k: int | None = None):
+            return [
+                RetrievalResult(
+                    rank=1,
+                    score=0.9,
+                    document_id="doc-1",
+                    filename="notes.txt",
+                    chunk_id="doc-1-chunk-0001",
+                    page_number=4,
+                    text="Service-oriented architecture uses loosely coupled services.",
+                )
+            ]
+
+    monkeypatch.setattr(llm_module, "Groq", FakeGroq)
+    pipeline = RAGPipeline(
+        retriever=StaticRetriever(),
+        llm_service=LLMService(provider="groq", model="test-model", groq_api_key="placeholder"),
+    )
+
+    response = pipeline.execute("What does service-oriented architecture use?")
+
+    assert response.provider == "groq"
+    assert response.answer == "Grounded Groq answer."
+    assert response.sources[0].page_number == 4
 
 
 def test_pipeline_propagates_provider_failure() -> None:

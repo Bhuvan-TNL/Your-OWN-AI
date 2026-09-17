@@ -6,3 +6,4 @@ pdfplumber
 python-multipart
 sentence-transformers
 faiss-cpu
+groq

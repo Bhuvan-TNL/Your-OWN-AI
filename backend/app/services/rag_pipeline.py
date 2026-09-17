@@ -82,6 +82,7 @@ class RAGPipeline:
             provider=settings.llm_provider,
             model=settings.llm_model,
             token=settings.hf_token,
+            groq_api_key=settings.groq_api_key,
         )
 
     def build_context(self, results: Sequence[RetrievalResult]) -> str:

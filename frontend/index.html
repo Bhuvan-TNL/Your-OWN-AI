@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Own AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="header-text">
+        <h1>Your Own AI</h1>
+        <p class="subtitle">Ask questions about your own documents.</p>
+      </div>
+      <div class="status" id="backendStatus">
+        <span class="status-dot" id="statusDot" aria-hidden="true"></span>
+        <span id="statusText">Checking backend…</span>
+        <button id="statusRetry" class="link-button" type="button" hidden>Retry</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="card" id="uploadCard" aria-labelledby="uploadHeading">
+        <h2 id="uploadHeading">Upload a document</h2>
+        <p class="card-hint">Accepted formats: .pdf, .txt</p>
+
+        <form id="uploadForm" class="upload-controls" novalidate>
+          <label class="file-label" for="fileInput">
+            <span id="fileLabelText">Choose a file…</span>
+          </label>
+          <input type="file" id="fileInput" name="file" accept=".pdf,.txt" hidden />
+          <button id="uploadButton" class="primary-button" type="submit" disabled>Upload</button>
+        </form>
+
+        <p id="uploadStatus" class="status-message" role="status" aria-live="polite"></p>
+
+        <dl id="uploadResult" class="result-panel" hidden></dl>
+      </section>
+
+      <section class="card" id="questionCard" aria-labelledby="questionHeading">
+        <h2 id="questionHeading">Ask a question</h2>
+        <label class="visually-hidden" for="questionInput">Your question</label>
+        <textarea
+          id="questionInput"
+          rows="3"
+          placeholder="Ask something about your uploaded documents… (Enter to ask, Shift+Enter for a new line)"
+        ></textarea>
+        <div class="question-actions">
+          <button id="askButton" class="primary-button" type="button" disabled>Ask</button>
+        </div>
+        <p id="queryStatus" class="status-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="card answer-card" id="answerCard" aria-labelledby="answerHeading" hidden>
+        <h2 id="answerHeading">Answer</h2>
+        <p id="answerText"></p>
+        <p id="answerMeta" class="answer-meta" hidden></p>
+      </section>
+
+      <section class="card sources-card" id="sourcesCard" aria-labelledby="sourcesHeading" hidden>
+        <h2 id="sourcesHeading">Sources</h2>
+        <ul class="sources-list" id="sourcesList"></ul>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Your Own AI — local document question answering, grounded in what you upload.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

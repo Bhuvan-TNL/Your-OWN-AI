@@ -1,10 +1,11 @@
-# Phase 8 technical validation
+# Phase 9 technical validation
 
 ## Scope and status
 
-Phase 8 validates the existing retrieval-augmented generation pipeline with the
-configured Hugging Face provider. The Phase 7 retrieval artifacts remain
-unchanged. The optimized runtime retrieval configuration is:
+Phase 9 adds the Groq provider behind the existing provider-independent LLM
+service and gates live evaluation behind an explicit smoke test. The Phase 7
+retrieval artifacts remain unchanged. The optimized runtime retrieval
+configuration is:
 
 ```text
 CHUNK_SIZE=256
@@ -14,34 +15,33 @@ SIMILARITY_THRESHOLD=0.15
 EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 ```
 
-Live validation is currently **blocked** because `HF_TOKEN` is not configured
-in the local `backend/.env`. No Hugging Face request was made and no real LLM
-answer metrics are reported. The blocked state is recorded in
-`evaluation/results/real_llm_baseline.json`.
+Live Groq validation is currently **blocked** in this workspace because the
+Groq key that was present during the audit was exposed in tool output and must
+be revoked and replaced before any API call. No Groq request was made and no
+real LLM answer metrics are reported. The blocked state is recorded in
+`evaluation/results/groq_real_llm_baseline.json`.
 
-## Existing LLM integration
+## LLM integration
 
-- Provider: `huggingface`, selected by `LLM_PROVIDER`.
-- Model: `google/flan-t5-base`, selected by `LLM_MODEL`.
-- Authentication: `HF_TOKEN` is loaded by the existing configuration layer
-  from `backend/.env`; the provider sends it as an Authorization Bearer header
-  only when a live call is made.
+- Provider: `groq`, selected by `LLM_PROVIDER`.
+- Model: `llama-3.3-70b-versatile`, selected by `LLM_MODEL`.
+- Authentication: `GROQ_API_KEY` is loaded by the existing configuration layer
+  from `backend/.env`; the Groq SDK receives it only when a live call is made.
 - Request flow: `RAGPipeline` retrieves FAISS results, applies the configured
   similarity threshold, formats source/page/chunk context, and calls
   `LLMService`.
 - Prompt construction: system instructions, retrieved context, question, and
   an instruction to answer only from context are assembled by `build_prompt`.
-- Generation parameters: `max_new_tokens=256`, `temperature=0.2`, and
-  `return_full_text=false`.
-- HTTP behavior: `httpx.Client` posts to the Hugging Face inference endpoint
-  with a 90-second timeout.
-- Error handling: HTTP failures, invalid JSON, provider error payloads, empty
-  responses, invalid configuration, and empty prompts are converted to typed
-  configuration/provider errors. The query API maps provider failures to HTTP
-  503 responses.
-- Response parsing: list responses use `generated_text`; dictionary responses
-  support `generated_text` or provider error payloads. Empty generated text is
-  rejected.
+- Generation parameters: `max_tokens=256` and `temperature=0.2`.
+- Groq request behavior: the official `groq` SDK sends separate system and user
+  messages to `chat.completions.create`, with configurable model, temperature,
+  and maximum tokens. The client uses a 90-second timeout.
+- Error handling: missing keys, SDK/client failures, rate limits, timeouts,
+  malformed responses, provider errors, empty responses, invalid configuration,
+  and empty prompts are converted to typed application exceptions. The query
+  API maps provider failures to HTTP 503 responses.
+- Response parsing: the first chat choice's message content is returned;
+  missing choices or empty content are rejected.
 
 ## Index validation
 
@@ -79,12 +79,12 @@ retrieval/generation/total latency, and total p95 latency.
 
 ## Results
 
-No real-provider result table is presented because the credential precondition
-was not satisfied. The deterministic mock results in
+No real-provider result table is presented because the Groq key must be
+rotated before live calls. The deterministic mock results in
 `evaluation/results/experiment_summary.json` are retained only as Phase 7
 retrieval-optimization evidence; they are not real LLM answer-quality results.
 
-`evaluation/results/real_vs_mock_comparison.json` explicitly marks the real
+`evaluation/results/groq_vs_phase7_comparison.json` explicitly marks the real
 side as unavailable rather than comparing incomparable measurements.
 
 ## Source correctness and failure analysis
@@ -100,26 +100,28 @@ claims.
 
 ## Security checks
 
-- `HF_TOKEN` was checked only for presence; its value was never printed.
-- The token is not stored in source, tests, JSON results, documentation, or
-  logs.
+- The configured `GROQ_API_KEY` was treated as compromised after exposure during
+  the audit. It was not stored in source or result artifacts, and it must be
+  revoked before live validation.
+- The key is not stored in source, tests, JSON results, or documentation.
 - `backend/.env` remains ignored by Git.
 - Phase 7 result files, including `baseline.json` and
   `experiment_summary.json`, were not overwritten.
 
 ## Reproducibility
 
-After placing a valid token in the local ignored `backend/.env`, run:
+After revoking the exposed key and placing a replacement only in the local
+ignored `backend/.env`, run:
 
 ```powershell
 python backend/scripts/reindex_vector_store.py --apply
-python evaluation/run_phase8_validation.py
+python evaluation/run_groq_validation.py --live
 ```
 
 The runner performs a supported and unsupported smoke test before evaluating
-all 19 questions. It writes the real result, source diagnostic, failure
-analysis, and mock-vs-real comparison under `evaluation/results/` without
-printing the token. Run the backend regression suite afterward:
+all 19 questions. It writes the Groq result, source diagnostic, failure
+analysis, and Phase 7 comparison under `evaluation/results/` without printing
+the key. Run the backend regression suite afterward:
 
 ```powershell
 cd backend
